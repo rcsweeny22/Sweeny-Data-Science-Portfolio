@@ -3,6 +3,7 @@ import pandas as pd
 
 #cd then file name
 #streamlit run Week_4
+#once in streamlit, do not touch terminal
 
 # ================================
 # Step 1: Displaying a Simple DataFrame in Streamlit
@@ -48,12 +49,18 @@ st.dataframe(filtered_df)
 # This teaches students how to work with external data in Streamlit
 # # Ensure the "data" folder exists with the CSV file
 # Display the imported dataset
-df2 = pd.read_csv("data\sample_data.csv")
-
+df2 = pd.read_csv("data\sample_data.csv") #this is a relative path as opposed to the full path I would have done normally
+#essentially hover over csv in VS code and copy relative path and you can even delete the initial path just have it in data folder
+st.dataframe(df2)
 # Using a selectbox to allow users to filter data by city
 # Students learn how to use widgets in Streamlit for interactivity
+salary = st.slider("Choose a salary range:", 
+                   min_value = df2["Salary"].min(),
+                   max_value = df2["Salary"].max())
 
 # Filtering the DataFrame based on user selection
+st.write(f"Salaries under {salary}:")
+st.dataframe(df2[df2 ['Salary'] <= salary])
 
 # Display the filtered results
 
