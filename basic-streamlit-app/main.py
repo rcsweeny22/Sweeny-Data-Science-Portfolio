@@ -1,16 +1,18 @@
 import streamlit as st
 import pandas as pd
 
+# Instructions: go to the Terminal and type in: streamlit run basic_streamlit_app/main.py
+
 # Creating a title and subtitles
 st.title("Analyzing Sample Data: Exploring Palmer's Penguins")
-st.subheader("Welcome to my first Streamlit App! This app offers numerous interactive fidgets and buttons which allow the audience to engage with the sample data set I chose, Palmer's Penguins.")
+st.subheader("Welcome to my first Streamlit App! This app offers numerous interactive fidgets and buttons which allow the audience to engage with the sample data set, Palmer's Penguins.")
 st.markdown("##### Now, let's look at some penguin data!")
 
 # Adding the penguin dataframe
 df = pd.read_csv("data/penguins.csv")
 
 # Displaying the table in Streamlit
-st.write("Here's the dataset loaded from the sample CSV file:")
+st.write("Here's the dataset loaded from the CSV file:")
 st.dataframe(df)
 
 # Species
@@ -60,7 +62,7 @@ st.dataframe(df[df['flipper_length_mm'] == flipper_length])
 st.write(f"Penguins with flippers that are smaller than {flipper_length} mm:")
 st.dataframe(df[df['flipper_length_mm'] <= flipper_length])
 
-st.write(f"Penguins with flipper that are larger than {flipper_length} mm:")
+st.write(f"Penguins with flippers that are larger than {flipper_length} mm:")
 st.dataframe(df[df['flipper_length_mm'] >= flipper_length])
 
 # Body mass
