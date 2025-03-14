@@ -69,11 +69,39 @@ st.subheader("Handle Missing Data")
 column = st.selectbox("Choose a column to fill", df.select_dtypes(include=["number"]).columns)
 
 # Apply the selected method to handle missing data.
-st.dataframe(df[column])
+# st.dataframe(df[column])
 
 method = st.radio("Choose a method:",
-         ["Original DF" , "Drop Rows", "Drop Columns", "Impute Mean", "Impute Median", "Impute Zero"])
+         ["Original DF" , "Drop Rows", "Drop Columns (>50% Missing)", "Impute Mean", "Impute Median", "Impute Zero"])
 
+# Copy our original data frame
+# df is going to remain untouched
+# df_clean is going to be our imputation/deletion df
+df_clean = df.copy()
+
+if method == "Original DF":
+    pass #I could also put 'df_clean' here
+elif method == "Drop Rows":
+    df_clean = df_clean.dropna() #this will drop all original rows with missing data; "df_clean.dropna(subset = [column])" this is saying is there is an NA then drop the whole row
+elif method == "Drop Columns (>50% Missing)":
+    df_clean = df_clean.drop(columns=df_clean.columns[df_clean.isnull().mean() > 0.5])
+elif method == "Impute Mean":
+    df_clean[column] = df_clean[column].fillna(df[column].mean())
+elif method == "Impute Median":
+    df_clean[column] = df_clean[column].fillna(df[column].median())
+elif method == "Impute Zero":
+    df_clean[column] = df_clean[column].fillna(0)
+
+st.subheader("Cleaned Data Distribution")
+fig, ax = plt.subplots()
+sns.histplot(df_clean[column], kde = True)
+st.pyplot(fig)
+
+# age is missing not at random data
+# imputations methods with MNAR data is not a good idea
+
+# st.dataframe(df_clean)
+st.write(df_clean.describe())
 # ------------------------------------------------------------------------------
 # Compare Data Distributions: Original vs. Cleaned
 #
