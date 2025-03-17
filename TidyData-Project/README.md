@@ -1,11 +1,12 @@
 # Sweeny TidyData Project: Travel Back in Time to the 2008 Olympics #
 
 ### Project Overview:
-- The goal of this project is to showcase my ability to organize, tidy, manipulate, and control data.
+- The goal of this project is to showcase my ability to organize, tidy, manipulate, and control data from the 2008 Olympics. Data in the real world is almost never tidy. Whether it be qualitative or quantitative, from a survey or an interview, data is complicated and it is often messy. Therefore, it is imperative for data scientists to have the skills responsible for organizing and cleaning up the real world data which comes across their desks.
+- So in this project, I decided to focus on a dataset from the 2008 Olympics in order to highlight my ability to tidy data. I chose this dataset because the Olympics portray sports as more than just a competition, but as an opportunity to represents one's country on the biggest stage and to be a symbol of hardwork and hope to people across the world. Cleaning this dataset felt like a small way I could honor some of the incredible achievements of these atheltes.
 
 ### Instructions:
-- Step 1: Download the olympics_08_medalists csv from the TidyData-Project Folder.
-- Step 2: Open VS Code and copy the code from the Jupyter Notebook in the TidyData-Project Folder.
+- Step 1: Download the [olympics_08_medalists.csv](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/blob/main/TidyData-Project/olympics_08_medalists.csv) from the TidyData-Project Folder.
+- Step 2: Open VS Code and copy the code from the [Jupyter Notebook](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/blob/main/TidyData-Project/TidyData-Project.ipynb) in the TidyData-Project Folder.
 - Step 3: Ensure that the csv is properly read into Python on VS code.
 - Step 4: Run the code.
 - Step 5: Compare the original untidy dataset with the tidy dataset.
