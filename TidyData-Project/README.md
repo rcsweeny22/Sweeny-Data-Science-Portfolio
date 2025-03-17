@@ -1,10 +1,10 @@
-# Sweeny TidyData Project: Travel Back in Time to the 2008 Olympics #
+# Sweeny TidyData Project: Travel Back in Time to the 2008 Olympics :running_shirt_with_sash: :mountain_bicyclist: :medal_sports: :weight_lifting: :flying_disc: #
 
-### Project Overview:
+### :earth_africa: Project Overview:
 - The goal of this project is to showcase my ability to organize, tidy, manipulate, and control data. Data in the real world is almost never tidy. Whether it be qualitative or quantitative, from a survey or an interview, data is complicated and it is often messy. Therefore, it is imperative for data scientists to have the skills responsible for organizing and cleaning up the real world data which comes across their desks.
 - So in this project, I decided to focus on a dataset from the 2008 Olympics in order to highlight my ability to tidy data. I chose this dataset because the Olympics portray sports as more than just a competition, but as an opportunity to represents one's country on the biggest stage and to be a symbol of hardwork and hope to people across the world. Cleaning this dataset felt like a small way I could honor some of the incredible achievements of these atheltes.
 
-### Instructions:
+### :speaking_head: Instructions:
 - Step 1: Download the [olympics_08_medalists.csv](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/blob/main/TidyData-Project/olympics_08_medalists.csv) from the TidyData-Project Folder.
 - Step 2: Open VS Code and copy the code from the [Jupyter Notebook](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/blob/main/TidyData-Project/TidyData-Project.ipynb) in the TidyData-Project Folder.
 - Step 3: Ensure that the csv is properly read into Python on VS code.
@@ -12,11 +12,11 @@
 - Step 5: Compare the original untidy dataset with the tidy dataset.
 - Dependencies: pandas, streamlit
   
-### Dataset Description:
+### :baby_symbol: Dataset Description:
 - Initially, author Giorgio Comai put together a downloadable dataset which measured all medalist from the 2008 Olympics by their place of birth. This is interesting because one would likely assume that the country which an athlete represented in the Olympics was also the place where they were born. This is not always the case though because athletes who compete in the Olympics are still real people with their own unique background. For example, one Olympian from the U.S.A. could have grown up with a parent in the military and while their parent was stationed in France with the rest of the family, they were born. Or, an athlete could have parents from different countries and dual citizenship which permits them to compete and represent a country that they might not have necessarily been born in.
 - This data was adapted from it's orginal source though and was made messy and untidy in a specific way in order to be cleaned and tidied in a comprehensible manner. Therefore, before processing the data I created code to make it read-able for my pc and any desired data manipulation purposes.
 
-### References: 
+### :memo: References: 
 - I referenced this [Pandas Cheet Sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf) and this [tidy data paper](https://vita.had.co.nz/papers/tidy-data.pdf) as resources for this TidyData Project.
 - For my dataset description, I referenced the [orginal source](https://edjnet.github.io/OlympicsGoNUTS/2008/) of the 2008 Olympic Medalists data that Comai organized.
   
