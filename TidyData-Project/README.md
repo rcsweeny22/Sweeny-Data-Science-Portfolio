@@ -6,10 +6,11 @@
 
 ### :speaking_head: Instructions:
 - Step 1: Download the [olympics_08_medalists.csv](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/blob/main/TidyData-Project/olympics_08_medalists.csv) from the TidyData-Project Folder.
-- Step 2: Open VS Code and copy the code from the [Jupyter Notebook](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/blob/main/TidyData-Project/TidyData-Project.ipynb) in the TidyData-Project Folder.
-- Step 3: Ensure that the csv is properly read into Python on VS code.
+- Step 2: Open Google Colab and copy the code from the [Jupyter Notebook](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/blob/main/TidyData-Project/TidyData-Project.ipynb) in the TidyData-Project Folder.
+- Step 3: Ensure that the csv is properly uploaded to Google Colab, either through uploading it or connecting your Google Drive. (If you upload it, you will need to re-upload it each time you go back to the code.)
 - Step 4: Run the code.
 - Step 5: Compare the original untidy dataset with the tidy dataset.
+- Step 6: Analyze the dataset through visualizations and pivot tables.
 - Dependencies: pandas, streamlit
   
 ### :baby_symbol: Dataset Description:
@@ -17,7 +18,7 @@
 - This data was adapted from it's orginal source though and was made messy and untidy in a specific way in order to be cleaned and tidied in a comprehensible manner. Therefore, before processing the data I created code to make it read-able for my pc and any desired data manipulation purposes.
 
 ### :memo: References: 
-- I referenced this [Pandas Cheet Sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf) and this [tidy data paper](https://vita.had.co.nz/papers/tidy-data.pdf) as resources for this TidyData Project.
+- I referenced this [Pandas Cheet Sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf) and [Tidy Data](https://vita.had.co.nz/papers/tidy-data.pdf) as resources for this TidyData Project.
 - For my dataset description, I referenced the [orginal source](https://edjnet.github.io/OlympicsGoNUTS/2008/) of the 2008 Olympic Medalists data that Comai organized.
   
 ### Visual Examples: Consider adding screenshots of your visualizations or code snippets.
