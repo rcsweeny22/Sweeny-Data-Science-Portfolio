@@ -17,5 +17,6 @@
 
 ### References: 
 - I referenced this [Pandas Cheet Sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf) and this [tidy data paper](https://vita.had.co.nz/papers/tidy-data.pdf) as resources for this TidyData Project.
+- For my dataset description, I referenced the [orginal source](https://edjnet.github.io/OlympicsGoNUTS/2008/) of the 2008 Olympic Medalists data that Comai organized.
   
 ### Visual Examples: Consider adding screenshots of your visualizations or code snippets.
