@@ -4,14 +4,16 @@
 ## Project 1- Creating my first Streamlit App! :penguin:
 ### Come try my new [penguin streamlit app](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/basic-streamlit-app)!
 
-### 	:calling: Update:
-- For this project I wanted to create an interractive app where users could engage with my code in a fun way! This is a great app for children and those interested in wildlife because it compares different species, sizes, and island of penguins. 
+### 	:calling: Updated Overview:
+- For this project I wanted to create an interractive app where users could engage with my code in a fun way! This is a great app for children and those interested in wildlife because it compares different species, sizes, and island of penguins.
+- I coded select boxes so users could filter penguins by island and also sliders so users could enagage with the bill and flipper length of the different penguin species. 
 
 ## Project 2- Tidy Data Project: Jump Back to the 2008 Olympics! 🏊
 ### Check out my [Tidy Data Project](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/TidyData-Project)!
 
 ### :desktop_computer: Overview:
 -  In this project you will be able to enagage with messy data about the 2008 Olympic Games and learn how to organize and clean the data in order to make it read-able for a computer. Sometimes, code that makes sense to us confuses programs which need data in a precise and organized fashion. All variables must be in their own column and all observations in their own row.
+-  I work through tidy data principles and utilize functions like pd.melt and dropna(subset=) in order to properly clean the messy 2008 Olympics dataset.
 
 #### Messy Data:
 ![Screenshot (18)](https://github.com/user-attachments/assets/b332bf7f-7f73-4afc-aa1c-fa78b1c96de7)
