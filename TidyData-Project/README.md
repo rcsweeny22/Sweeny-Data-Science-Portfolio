@@ -6,7 +6,7 @@
 
 ### :speaking_head: Instructions:
 - Step 1: Download the [olympics_08_medalists.csv](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/blob/main/TidyData-Project/olympics_08_medalists.csv) from the TidyData-Project Folder.
-- Step 2: Open Google Colab and copy the code from the [Jupyter Notebook](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/blob/main/TidyData-Project/TidyData-Project.ipynb) in the TidyData-Project Folder.
+- Step 2: Open Google Colab and copy the code from the [Jupyter Notebook](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/blob/main/TidyData-Project/TidyData_Project.ipynb) in the TidyData-Project Folder.
 - Step 3: Ensure that the csv is properly uploaded to Google Colab, either through uploading it or connecting your Google Drive. (If you upload it, you will need to re-upload it each time you go back to the code.)
 - Step 4: Run the code.
 - Step 5: Compare the original untidy dataset with the tidy dataset.
