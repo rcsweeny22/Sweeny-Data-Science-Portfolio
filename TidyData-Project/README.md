@@ -12,7 +12,7 @@
 - Step 5: Compare the original untidy dataset with the tidy dataset.
 - Step 6: Analyze the dataset through visualizations and pivot tables.
   
-- Dependencies: pandas, seaborn, matplotlib.pyplot
+ Dependencies: pandas, seaborn, matplotlib.pyplot
 ```
 import pandas as pd
 import seaborn as sns
