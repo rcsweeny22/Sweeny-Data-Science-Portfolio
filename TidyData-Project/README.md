@@ -11,14 +11,27 @@
 - Step 4: Run the code.
 - Step 5: Compare the original untidy dataset with the tidy dataset.
 - Step 6: Analyze the dataset through visualizations and pivot tables.
-- Dependencies: pandas, streamlit
+  
+- Dependencies: pandas, seaborn, matplotlib.pyplot
+```
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt 
+```
   
 ### :baby_symbol: Dataset Description:
 - Initially, author Giorgio Comai put together a downloadable dataset which measured all medalist from the 2008 Olympics by their place of birth. This is interesting because one would likely assume that the country which an athlete represented in the Olympics was also the place where they were born. This is not always the case though because athletes who compete in the Olympics are still real people with their own unique background. For example, one Olympian from the U.S.A. could have grown up with a parent in the military and while their parent was stationed in France with the rest of the family, they were born. Or, an athlete could have parents from different countries and dual citizenship which permits them to compete and represent a country that they might not have necessarily been born in.
 - This data was adapted from it's orginal source though and was made messy and untidy in a specific way in order to be cleaned and tidied in a comprehensible manner. Therefore, before processing the data I created code to make it read-able for my pc and any desired data manipulation purposes.
 
+### 🌟Results:
+- After cleaning the messy data I was able to make some interesting visualizations.
+![Screenshot (15)](https://github.com/user-attachments/assets/b6337737-542d-4039-95c5-a240a854f521)
+- This grouped bar plot visualizes the number of bronze, silver, and gold medals awarded to male and female Olympians. It is interesting that bronze medals have a higher count than silver or gold. Also, male athletes had more medals overall which might indicate that more Olympic Events are gender specific and male-only. 
+
+![Screenshot (17)](https://github.com/user-attachments/assets/267bffda-88b5-4e9d-bd5b-c1bec133f25d)
+- This plot checks to ensure that the cleaned dataset did not inaccurately categorize the gender of the medalists in cases of gender specific events like boxing. It also shows that both male and female events are equal which disproves my previous hypothesis about an uneven number of male events.
+
+
 ### :memo: References: 
 - I referenced this [Pandas Cheet Sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf) and [Tidy Data](https://vita.had.co.nz/papers/tidy-data.pdf) as resources for this TidyData Project.
 - For my dataset description, I referenced the [orginal source](https://edjnet.github.io/OlympicsGoNUTS/2008/) of the 2008 Olympic Medalists data that Comai organized.
-  
-### Visual Examples: Consider adding screenshots of your visualizations or code snippets.
