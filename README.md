@@ -4,7 +4,7 @@
 ## Project 1- Creating my first Streamlit App! :penguin:
 ### Come try my new [penguin streamlit app](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/basic-streamlit-app)!
 
-### 	🖥️: Updated Overview:
+### 	🖥️: Overview:
 - For this project I wanted to create an interractive app where users could engage with my code in a fun way! This is a great app for children and those interested in wildlife because it compares different species, sizes, and island of penguins.
 - I coded select boxes so users could filter penguins by island and also sliders so users could enagage with the bill and flipper length of the different penguin species. 
 
