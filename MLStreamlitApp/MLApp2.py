@@ -5,61 +5,60 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression
 
-# -----------------------------------------------
-# Application Information
-# -----------------------------------------------
-st.title("KNN Performance: Scaled vs. Unscaled")
+st.title("Machine Learning ML Application")
 st.markdown("""
 ### About This Application
-This interactive application demonstrates the performance of a K-Nearest Neighbors (KNN) classifier using the Titanic dataset. You can:
-- **Select different numbers of neighbors (k)** to see how it affects model performance.
-- **Toggle between unscaled and scaled data** to understand the impact of feature scaling on classification.
-- **View performance metrics** including accuracy, a confusion matrix, and a classification report.
-The Titanic dataset is preprocessed to include key features like passenger class, age, fare, and a one-hot encoded gender indicator.
+This interactive application demonstrates the different elements of a Linear Regression model using either your own data or the Taxi dataset.
+You can:
+- **Input different numeric, continuous feature variables.
+- **Set your own target variable that this machine learning application will predict.
 """)
 
-# -----------------------------------------------
-# Helper Functions
-# -----------------------------------------------
+### Download or Upload DataSet ###
+
 def load_and_preprocess_data():
-    # Load the Taxi dataset from seaborn
-    df = sns.load_dataset('taxis')
-    # Remove rows with missing 'passengers' values
-    df.dropna(subset=['passengers'], inplace=True)
+    file = st.radio("Upload your own csv.file or use the Taxi dataset", options = ['Option 1', 'Option 2'])
+    # Option 1: Insert your own dataset
+    if file == 'Option 1':
+        df = st.file_uploader('Upload a csv file', type = 'csv')
+    else:
+        df = sns.load_dataset('taxis') # Option 2: Load the Taxi dataset from seaborn
+    st.dataframe(df)
+    # Remove rows with missing values
+    df.dropna(inplace=True)
     # Define features and target
-    features = ['passengers', 'distance', 'tip', 'tolls']
+    st.markdown("""
+                ### Since this is a Linear Regression application, make sure to select features and a target variable which are continuous and numeric.
+                 """)
+    features = st.selectbox("Choose your features here", options = df.columns) # grab the columns so they have drop down of column names
+    st.write("The features you selected are", features)
     X = df[features]
-    y = df['fare']
+    target_var = st.selectbox("Choose your target variable here", options = df.columns)
+    y = df[target_var]
     return df, X, y, features
+
 
 def split_data(X, y, test_size=0.2, random_state=42):
     return train_test_split(X, y, test_size=test_size, random_state=random_state)
 
-def train_knn(X_train, y_train, n_neighbors):
-    knn = KNeighborsClassifier(n_neighbors=n_neighbors)
-    knn.fit(X_train, y_train)
-    return knn
+# Initialize and train the linear regression model on unscaled data
+def initialize_and_train_linear_regression():
+    # Initialize class (getting it ready)
+    lin_reg = LinearRegression()
+    # Train our data ('fit' method changes this class automatically)
+    lin_reg.fit(X_train, y_train)
+    # Make predictions on the test set
+    y_pred = lin_reg.predict(X_test) #this is putting the 20% of our X_test into model & getting what the model predicts the y-value is NEXT STEP we will compare to y_test
+    print(y_pred)
 
-def plot_confusion_matrix(cm, title):
-    plt.figure(figsize=(6,4))
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
-    plt.title(title)
-    plt.xlabel('Predicted')
-    plt.ylabel('Actual')
-    st.pyplot(plt)
-    plt.clf()
 
-# -----------------------------------------------
-# Streamlit App Layout
-# -----------------------------------------------
+### Streamlit App Layout ###
 
 # Selection controls at the top
-st.markdown("### Select Parameters")
-k = st.slider("Select number of neighbors (k, odd values only)", min_value=1, max_value=23, step=2, value=5)
 data_type = st.radio("Data Type", options=["Unscaled", "Scaled"])
 
 # Load and preprocess the data; split into training and testing sets
@@ -72,41 +71,34 @@ if data_type == "Scaled":
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
 
-# Train KNN with the selected k value
-knn_model = train_knn(X_train, y_train, n_neighbors=k)
+lin_reg_model = initialize_and_train_linear_regression()
 if data_type == "Scaled":
-    st.write(f"**Scaled Data: KNN (k = {k})**")
+    st.write(f"**Scaled Data: Linear Regression Model**")
 else:
-    st.write(f"**Unscaled Data: KNN (k = {k})**")
-
-# Predict and evaluate
-y_pred = knn_model.predict(X_test)
-accuracy_val = accuracy_score(y_test, y_pred)
-st.write(f"**Accuracy: {accuracy_val:.2f}**")
+    st.write(f"**Unscaled Data: Linear Regression Model**")
 
 # Create two columns for side-by-side display
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("Confusion Matrix")
-    cm = confusion_matrix(y_test, y_pred)
-    plot_confusion_matrix(cm, f"KNN Confusion Matrix ({data_type} Data)")
+    st.subheader("Trained Linear Regression Model")
+    plt.scatter(X_train, y_train, color='blue')
+    plt.plot(X_train, lin_reg_model.predict(X_train), color='red')
+    plt.title('Linear Regression Model')
+    plt.show()
 
 with col2:
-    st.subheader("Classification Report")
-    st.text(classification_report(y_test, y_pred))
+    st.subheader("Linear Regression Test Data")
+    plt.scatter(X_test, y_test, color='blue')
+    plt.plot(X_test, lin_reg_model, color='red')
+    plt.title('Linear Regression Model')
+    plt.show()
 
-# -----------------------------------------------
-# Additional Data Information Section
-# -----------------------------------------------
+### Additional Data Information Section ###
+
 with st.expander("Click to view Data Information"):
-    st.write("### Overview of the Titanic Dataset")
-    st.write("""
-        The taxi dataset contains information about yellow taxi rides during a specific time frame.
-        It includes details such as tips, tolls, number of passengers, and distance of the ride.
-        The target variable 'fare' indicates the amount in USD of the taxi ride itself, before tips and toll costs are added.
-    """)
     st.write("#### First 5 Rows of the Dataset")
     st.dataframe(df.head())
     st.write("#### Statistical Summary")
     st.dataframe(df.describe())
+
