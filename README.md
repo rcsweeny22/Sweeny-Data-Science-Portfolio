@@ -4,7 +4,7 @@
 ## Project 1- Creating my first Streamlit App! :penguin:
 ### Come try my new [penguin streamlit app](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/basic-streamlit-app)!
 
-### 	:calling: Updated Overview:
+### 	🖥️: Overview:
 - For this project I wanted to create an interractive app where users could engage with my code in a fun way! This is a great app for children and those interested in wildlife because it compares different species, sizes, and island of penguins.
 - I coded select boxes so users could filter penguins by island and also sliders so users could enagage with the bill and flipper length of the different penguin species. 
 
@@ -22,3 +22,12 @@
 
 ### 	:bulb: Relationship:
 - This Tidy Data Project adds a lot of depth to my overall coding portfolio because it allows me to showcase my skills for manipulating and cleaning a dataset, which is a job that many data analysts are tasked with in the real world. Often tidying data can be the bulk of the work a data analyst or scientist has to accomplish so in order to eventually work on analyzing data which is also important, this fundamental data work of tidying is absoluetly crucial. Data in the real world is not going to come in a neat, read-able format, so we have the responsibility of manipulating and tidying the messy and real information.
+
+## Project 3 - Machine Learning Application :calling:
+### Send this link[] to family and friends and spread the ML love!
+
+### 🖥️ Overview:
+- In this project I created a Streamlit app that is accessible to anyone on my Stremlit Community Cloud account.
+
+### 💡Relationship: 
+- 
