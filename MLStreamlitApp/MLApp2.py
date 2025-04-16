@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, root_mean_squared_error, r2_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression, LogisticRegression
 
@@ -81,6 +81,20 @@ def initialize_and_train_logistic_regression():
     y_pred = log_reg.predict(X_test) #this is again putting the 20% of our X_test into model & getting what the model predicts the y-value is
     return log_reg, y_pred
 
+def lin_reg_viz():
+    plt.scatter(X_test, y_test, color='blue')
+    plt.plot(X_test, lin_reg_model, color='red')
+    plt.title('Linear Regression Model')
+    plt.show()
+
+def lin_reg_metrics():
+    rmse_lin = root_mean_squared_error(y_test, y_pred)
+    r2_lin = r2_score(y_test, y_pred)
+    print("Unscaled Data Model:")
+    print(f"Root Squred Error: {rmse_lin:.2f}")
+    print(f"R^2 Score: {r2_lin:.2f}")
+    return rmse_lin, r2_lin
+
 def plot_confusion_matrix(cm, title):
     plt.figure(figsize=(6,4))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
@@ -117,10 +131,8 @@ if data_type == "Scaled":
 if selected_model == 'Linear Regression':
     lin_reg_model, y_pred = initialize_and_train_linear_regression()
     st.subheader("Linear Regression Model")
-    plt.scatter(X_test, y_test, color='blue')
-    plt.plot(X_test, lin_reg_model, color='red')
-    plt.title('Linear Regression Model')
-    plt.show()
+    print(lin_reg_viz)
+    print(lin_reg_metrics)
 
 elif selected_model == "Logistic Regression":
     log_reg_model, y_pred = initialize_and_train_logistic_regression()
