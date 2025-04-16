@@ -21,7 +21,7 @@ You can:
 ### Download or Upload DataSet ###
 
 def load_and_preprocess_data():
-    file = st.radio("Upload your own csv.file or choose a Seaborn dataset", options = ['Upload csv.file', 'Seaborn dataset'])
+    file = st.radio("Upload your own csv.file or choose a pre-loaded dataset from Seaborn", options = ['Upload csv.file', 'Seaborn dataset'])
     # Option 1: Insert your own dataset
     if file == 'Upload csv.file':
         user_file = st.file_uploader('Upload a csv file', type = 'csv')
@@ -41,7 +41,7 @@ def load_and_preprocess_data():
 
     # Define features and target
     st.markdown("""
-                ### Depending on the Machine Learning Model you choose to explore, your feature and target variables will change.
+                ## Depending on the Machine Learning Model you choose to explore, your feature and target variables will change.
                 # For Linear Regression models, make sure to select feature and target variables which are continuous and numeric.
                 # For Logistic Regression models make sure to select categorical or continuous variables for the features and a binary variable for the target. Binary means the target variable's outcome must be 0 or 1, yes or no.
                  """)
@@ -90,10 +90,16 @@ def plot_confusion_matrix(cm, title):
 
 ### Streamlit App Layout ###
 
-selected_model = st.radio("Choose Linear or Logistic Regression Model", options = ["Linear Regression", "Logistic Regression"])
+# Selection controls at the top - Create two columns for side-by-side display
+col1, col2 = st.columns(2)
 
-# Selection controls at the top
-data_type = st.radio("Data Type", options=["Unscaled", "Scaled"])
+with col1:
+    st.subheader("Regression Model")
+    selected_model = st.radio("Choose a type of Regression Model:", options = ["Linear Regression", "Logistic Regression"])
+
+with col2:
+    st.subheader("Data Type")
+    data_type = st.radio("Choose a type of ", options=["Unscaled", "Scaled"])
 
 # Load and preprocess the data; split into training and testing sets
 df, X, y, features = load_and_preprocess_data()
@@ -129,3 +135,5 @@ with st.expander("Click to view Data Information"):
     st.write("#### Statistical Summary")
     st.dataframe(df.describe())
 
+### User Review ###
+st.feedback('stars')
