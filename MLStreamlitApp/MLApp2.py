@@ -5,9 +5,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, LogisticRegression
 
 st.title("Machine Learning ML Application")
 st.markdown("""
@@ -41,7 +41,9 @@ def load_and_preprocess_data():
 
     # Define features and target
     st.markdown("""
-                ### Since this is a Linear Regression application, make sure to select features and a target variable which are continuous and numeric.
+                ### Depending on the Machine Learning Model you choose to explore, your feature and target variables will change.
+                # For Linear Regression models, make sure to select feature and target variables which are continuous and numeric.
+                # For Logistic Regression models make sure to select categorical or continuous variables for the features and a binary variable for the target. Binary means the target variable's outcome must be 0 or 1, yes or no.
                  """)
     
     # Choosing features
@@ -54,7 +56,7 @@ def load_and_preprocess_data():
     return df, X, y, features
 
 
-def split_data(X, y, test_size=0.2, random_state=42):
+def split_data(X, y, test_size=0.2, random_state=42): # random state allows for replicated results - improves user experience
     return train_test_split(X, y, test_size=test_size, random_state=random_state)
 
 # Initialize and train the linear regression model on unscaled data
@@ -64,11 +66,31 @@ def initialize_and_train_linear_regression():
     # Train our data ('fit' method changes this class automatically)
     lin_reg.fit(X_train, y_train)
     # Make predictions on the test set
-    y_pred = lin_reg.predict(X_test) #this is putting the 20% of our X_test into model & getting what the model predicts the y-value is NEXT STEP we will compare to y_test
-    print(y_pred)
+    y_pred = lin_reg.predict(X_test) #this is putting the 20% of our X_test into model & getting what the model predicts the y-value is
+    return lin_reg, y_pred
 
+# Initialize and train a logistic regression model on unscaled data
+def initialize_and_train_logistic_regression():
+    # Initialize class (getting it ready)
+    log_reg = LogisticRegression()
+    # Train our data ('fit' method changes this class automatically)
+    log_reg.fit(X_train, y_train)
+    # Make predictions on the test set
+    y_pred = log_reg.predict(X_test) #this is again putting the 20% of our X_test into model & getting what the model predicts the y-value is
+    return log_reg, y_pred
+
+def plot_confusion_matrix(cm, title):
+    plt.figure(figsize=(6,4))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+    plt.title(title)
+    plt.xlabel('Predicted')
+    plt.ylabel('Actual')
+    st.pyplot(plt)
+    plt.clf()
 
 ### Streamlit App Layout ###
+
+selected_model = st.radio("Choose Linear or Logistic Regression Model", options = ["Linear Regression", "Logistic Regression"])
 
 # Selection controls at the top
 data_type = st.radio("Data Type", options=["Unscaled", "Scaled"])
@@ -83,28 +105,21 @@ if data_type == "Scaled":
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
 
-lin_reg_model = initialize_and_train_linear_regression()
-if data_type == "Scaled":
-    st.write(f"**Scaled Data: Linear Regression Model**")
-else:
-    st.write(f"**Unscaled Data: Linear Regression Model**")
-
-# Create two columns for side-by-side display
-col1, col2 = st.columns(2)
-
-with col1:
-    st.subheader("Trained Linear Regression Model")
-    plt.scatter(X_train, y_train, color='blue')
-    plt.plot(X_train, lin_reg_model.predict(X_train), color='red')
-    plt.title('Linear Regression Model')
-    plt.show()
-
-with col2:
-    st.subheader("Linear Regression Test Data")
+# Training data and displaying results
+if selected_model == 'Linear Regression':
+    lin_reg_model, y_pred = initialize_and_train_linear_regression()
+    st.subheader("Linear Regression Model")
     plt.scatter(X_test, y_test, color='blue')
     plt.plot(X_test, lin_reg_model, color='red')
     plt.title('Linear Regression Model')
     plt.show()
+
+elif selected_model == "Logistic Regression":
+    log_reg_model, y_pred = initialize_and_train_logistic_regression()
+    st.subheader("Logistic Regression Model")
+    cm = confusion_matrix(y_test, y_pred)
+    plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
+
 
 ### Additional Data Information Section ###
 
