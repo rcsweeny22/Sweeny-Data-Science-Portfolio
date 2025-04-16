@@ -31,8 +31,7 @@ def load_and_preprocess_data():
     # Remove rows with missing values
     df.dropna(inplace=True)
     # Define features and target
-    st.markdown("""
-                ### Since this is a Linear Regression application, make sure to select features and a target variable which are continuous and numeric.
+    st.markdown("""Since this is a Linear Regression application, make sure to select features and a target variable which are continuous and numeric.
                  """)
     features = st.selectbox("Choose your features here", options = df.columns) # grab the columns so they have drop down of column names
     st.write("The features you selected are", features)
