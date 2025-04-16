@@ -21,12 +21,12 @@ You can:
 ### Download or Upload DataSet ###
 
 def load_and_preprocess_data():
-    file = st.radio("Upload your own csv.file or use the Taxi dataset", options = ['Option 1', 'Option 2'])
+    file = st.radio("Upload your own csv.file or use a Seaborn dataset", options = ['Option 1', 'Option 2'])
     # Option 1: Insert your own dataset
     if file == 'Option 1':
         df = st.file_uploader('Upload a csv file', type = 'csv')
     else:
-        df = sns.load_dataset('taxis') # Option 2: Load the Taxi dataset from seaborn
+        df = st.selectbox(sns.load_dataset(['taxis', 'titanic', 'iris', 'penguins'])) # Option 2: Load a dataset from seaborn
     st.dataframe(df)
     # Remove rows with missing values
     df.dropna(inplace=True)
