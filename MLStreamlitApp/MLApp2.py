@@ -43,8 +43,8 @@ def load_and_preprocess_data():
     # Define features and target
     st.markdown("""
                 ## Depending on the Machine Learning Model you choose to explore, your feature and target variables will change.
-                # For Linear Regression models, make sure to select feature and target variables which are continuous and numeric.
-                # For Logistic Regression models make sure to select categorical or continuous variables for the features and a binary variable for the target. Binary means the target variable's outcome must be 0 or 1, yes or no.
+                ### For Linear Regression models, make sure to select feature and target variables which are continuous and numeric.
+                ### For Logistic Regression models make sure to select categorical or continuous variables for the features and a binary variable for the target. Binary means the target variable's outcome must be 0 or 1, yes or no.
                  """)
     
     # Choosing features
