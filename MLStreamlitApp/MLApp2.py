@@ -81,10 +81,10 @@ def initialize_and_train_logistic_regression():
     y_pred = log_reg.predict(X_test) #this is again putting the 20% of our X_test into model & getting what the model predicts the y-value is
     return log_reg, y_pred
 
-def lin_reg_fig(lin_reg_model, X_test, y_test):
-    y_pred = lin_reg_model.predict(X_test)
+def lin_reg_fig(lin_reg, X_test, y_test):
+    y_pred = lin_reg.predict(X_test)
     plt.scatter(X_test, y_test, color='blue')
-    plt.plot(X_test, lin_reg_model, color='red')
+    plt.plot(X_test, lin_reg, color='red')
     plt.title('Linear Regression Model')
     plt.xlabel('Feature')
     plt.ylabel('Target')
@@ -132,13 +132,13 @@ if data_type == "Scaled":
 
 # Training data and displaying results
 if selected_model == 'Linear Regression':
-    lin_reg_model, y_pred = initialize_and_train_linear_regression()
+    lin_reg, y_pred = initialize_and_train_linear_regression()
     st.subheader("Linear Regression Model")
-    lin_reg_fig(lin_reg_model, X_test, y_test)
+    lin_reg_fig(lin_reg, X_test, y_test)
     lin_reg_metrics(y_test, y_pred)
 
 elif selected_model == "Logistic Regression":
-    log_reg_model, y_pred = initialize_and_train_logistic_regression()
+    log_reg, y_pred = initialize_and_train_logistic_regression()
     st.subheader("Logistic Regression Model")
     cm = confusion_matrix(y_test, y_pred)
     plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
