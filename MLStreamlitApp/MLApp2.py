@@ -82,7 +82,7 @@ def initialize_and_train_logistic_regression():
     return log_reg, y_pred
 
 # Create a visualization of Linear Regression Model
-def lin_reg_fig(lin_reg, X_test, y_test):
+def lin_reg_fig(X_test, y_test):
     plt.scatter(X_test, y_test, color='blue')
     plt.plot(X_test, lin_reg, color='red')
     plt.title('Linear Regression Model')
