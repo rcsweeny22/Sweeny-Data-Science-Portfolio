@@ -12,10 +12,11 @@ from sklearn.linear_model import LinearRegression, LogisticRegression
 st.title("Machine Learning ML Application")
 st.markdown("""
 ### About This Application
-This interactive application demonstrates the different elements of a Linear Regression model using either your own data or a Seaborn dataset.
+This interactive application demonstrates the different elements of Linear and Logistic Regression.
 You can:
-- **Input different numeric, continuous feature variables.
-- **Set your own target variable that this machine learning application will predict.
+- Use your own dataset or one of Seaborn's pre-loaded datasets (Iris, Titanic, Penguins, or Taxis).
+- Input different numeric, continuous feature and target variables to explore the elements of predictive Linear Regression models.
+- Discover binary classification results from Logistic Rregression after selecting categorical and continuous variables for feature and target variables.
 """)
 
 ### Download or Upload DataSet ###
@@ -24,12 +25,12 @@ def load_and_preprocess_data():
     file = st.radio("Upload your own csv.file or choose a pre-loaded dataset from Seaborn", options = ['Upload csv.file', 'Seaborn dataset'])
     # Option 1: Insert your own dataset
     if file == 'Upload csv.file':
-        user_file = st.file_uploader('Upload a csv file', type = 'csv')
-        if user_file is not None:
+        user_file = st.file_uploader('Upload a csv file', type = 'csv') # use streamlit widget for uploading files - set to only accepting csv
+        if user_file is not None: # if the user uploads a file then that will be set as the df variable
             df = pd.read_csv(user_file)
     else:
-        dataset_names = ['iris', 'titanic', 'penguins', 'taxis']
-        Seaborn_dataset = st.selectbox("Choose a Seaborn dataset:", dataset_names) # Option 2: Load a dataset from seaborn
+        dataset_names = ['iris', 'titanic', 'penguins', 'taxis'] # curate what Seaborn datasets I want to allow users to choose from
+        Seaborn_dataset = st.selectbox("Choose a Seaborn dataset:", dataset_names) # streamlit widget
         if Seaborn_dataset:
             df = sns.load_dataset(Seaborn_dataset)
 
