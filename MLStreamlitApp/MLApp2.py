@@ -12,7 +12,7 @@ from sklearn.linear_model import LinearRegression, LogisticRegression
 st.title("Machine Learning ML Application")
 st.markdown("""
 ### About This Application
-This interactive application demonstrates the different elements of a Linear Regression model using either your own data or the Taxi dataset.
+This interactive application demonstrates the different elements of a Linear Regression model using either your own data or a Seaborn dataset.
 You can:
 - **Input different numeric, continuous feature variables.
 - **Set your own target variable that this machine learning application will predict.
@@ -28,7 +28,7 @@ def load_and_preprocess_data():
         if user_file is not None:
             df = pd.read_csv(user_file)
     else:
-        dataset_names = sns.get_dataset_names()
+        dataset_names = ['iris', 'titanic', 'penguins', 'taxis']
         Seaborn_dataset = st.selectbox("Choose a Seaborn dataset:", dataset_names) # Option 2: Load a dataset from seaborn
         if Seaborn_dataset:
             df = sns.load_dataset(Seaborn_dataset)
