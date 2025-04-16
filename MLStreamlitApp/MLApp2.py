@@ -81,7 +81,7 @@ def initialize_and_train_logistic_regression():
     y_pred = log_reg.predict(X_test) #this is again putting the 20% of our X_test into model & getting what the model predicts the y-value is
     return log_reg, y_pred
 
-def lin_reg_viz():
+def lin_reg_fig():
     plt.scatter(X_test, y_test, color='blue')
     plt.plot(X_test, lin_reg_model, color='red')
     plt.title('Linear Regression Model')
@@ -131,7 +131,7 @@ if data_type == "Scaled":
 if selected_model == 'Linear Regression':
     lin_reg_model, y_pred = initialize_and_train_linear_regression()
     st.subheader("Linear Regression Model")
-    print(lin_reg_viz)
+    st.pyplot(lin_reg_fig)
     print(lin_reg_metrics)
 
 elif selected_model == "Logistic Regression":
