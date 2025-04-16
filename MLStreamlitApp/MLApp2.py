@@ -99,7 +99,7 @@ with col1:
 
 with col2:
     st.subheader("Data Type")
-    data_type = st.radio("Choose a type of ", options=["Unscaled", "Scaled"])
+    data_type = st.radio("Choose a type of data:", options=["Unscaled", "Scaled"])
 
 # Load and preprocess the data; split into training and testing sets
 df, X, y, features = load_and_preprocess_data()
