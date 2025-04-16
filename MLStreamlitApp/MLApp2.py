@@ -22,12 +22,12 @@ You can:
 
 def load_and_preprocess_data():
     file = st.radio("Upload your own csv.file or choose a Seaborn dataset", options = ['Option 1', 'Option 2'])
-    dataset_names = ['taxis', 'titanic', 'iris', 'penguins']
+    dataset_names = sns.get_dataset_names()
     # Option 1: Insert your own dataset
     if file == 'Option 1':
         df = st.file_uploader('Upload a csv file', type = 'csv')
     else:
-        df = st.selectbox(sns.load_dataset(dataset_names)) # Option 2: Load a dataset from seaborn
+        df = st.selectbox("Choose a Seaborn dataset:", sns.load_dataset(dataset_names)) # Option 2: Load a dataset from seaborn
     st.dataframe(df)
     # Remove rows with missing values
     df.dropna(inplace=True)
