@@ -21,24 +21,35 @@ You can:
 ### Download or Upload DataSet ###
 
 def load_and_preprocess_data():
-    file = st.radio("Upload your own csv.file or choose a Seaborn dataset", options = ['Option 1', 'Option 2'])
-    dataset_names = sns.get_dataset_names()
+    file = st.radio("Upload your own csv.file or choose a Seaborn dataset", options = ['Upload csv.file', 'Seaborn dataset'])
     # Option 1: Insert your own dataset
-    if file == 'Option 1':
-        df = st.file_uploader('Upload a csv file', type = 'csv')
+    if file == 'Upload csv.file':
+        user_file = st.file_uploader('Upload a csv file', type = 'csv')
+        if user_file is not None:
+            df = pd.read_csv(user_file)
     else:
-        df = st.selectbox("Choose a Seaborn dataset:", sns.load_dataset(dataset_names)) # Option 2: Load a dataset from seaborn
+        dataset_names = sns.get_dataset_names()
+        Seaborn_dataset = st.selectbox("Choose a Seaborn dataset:", dataset_names) # Option 2: Load a dataset from seaborn
+        if Seaborn_dataset:
+            df = sns.load_dataset(Seaborn_dataset)
+
+    # Display dataset
     st.dataframe(df)
+
     # Remove rows with missing values
     df.dropna(inplace=True)
+
     # Define features and target
     st.markdown("""
                 ### Since this is a Linear Regression application, make sure to select features and a target variable which are continuous and numeric.
                  """)
-    features = st.selectbox("Choose your features here", options = df.columns) # grab the columns so they have drop down of column names
-    st.write("The features you selected are", features)
+    
+    # Choosing features
+    features = st.multiselect("Choose features here", options = df.columns) # grab the columns so they have drop down of column names
+
+    # Choosing target variable
+    target_var = st.selectbox("Choose your target variable here (target variable cannot be one of selected feature variables)", options = df.columns)
     X = df[features]
-    target_var = st.selectbox("Choose your target variable here", options = df.columns)
     y = df[target_var]
     return df, X, y, features
 
