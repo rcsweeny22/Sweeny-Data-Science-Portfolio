@@ -23,7 +23,7 @@ with tab1:
     In this app, you can:
     - Use one of Seaborn's pre-loaded datasets like Titanic, Penguins, or Taxis, or upload your own csv.file.
     - Input different features and target variables to explore the elements of K Nearest-Neighbors.
-    - Toggle between different parameters (k) to change the number of neighbors used to classify the data.
+    - Toggle between different parameters to change the number of neighbors (k) used to classify the data.
     - Compare between scaled and unscaled data.
     - Calculate the overall accuracy score as well as the F-1 score for each section of the Confusion Matrix.
     """)
@@ -33,7 +33,7 @@ with tab2:
     def load_and_preprocess_data():
         st.markdown("""
                     ### Important Instructions:
-                    ###### For KNN, make sure to select categorical or continuous variables for the features and a categorical variable for the target.
+                    ###### For KNN, make sure to select continuous numeric variables for the features and a categorical variable for the target.
                     """)
         file = st.radio("Choose a pre-loaded dataset from Seaborn or upload your own csv.file", options = ['Seaborn dataset', 'Upload csv.file'])
         df = None
@@ -130,19 +130,22 @@ with tab3:
         st.subheader("Confusion Matrix")
         cm = confusion_matrix(y_test, y_pred)
         plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
-        st.markdown("Confusion Matricies show the Actual values compared to the Predicted values." \
-        "- The upper left quadrant has the True Negatives, which means the number of datapoints the model predicts to be negative (0) and in actuality are negative (0). We want this quadrant to be high because that means it is good at correctly classifying negatives." \
-        "- The upper right quadrant is the False Positives, which means the model predicts a positive (1) outcome but in actuality the data point was negative (0). We do not want this quadrant to have a high number." \
-        "- The lower left quadrant is False Negatives, which are the points which the model predicts to be negative (0) but are actually positive (1). We want to limit this number as well." \
-        "- Finally, the lower right quadrant is the True Positives where the model predicts a positive (1) outcome and it is actually positive (1). We want to maximize True Positives and True Negatives because that means the model is good at classifying.")
+        st.markdown("""Confusion Matricies show the Actual values compared to the Predicted values.
+                    - The upper left quadrant has the True Negatives, which means the number of datapoints the model predicts to be negative (0) and in actuality are negative (0). We want this quadrant to be high because that means it is good at correctly classifying negatives.
+                    - The upper right quadrant is the False Positives, which means the model predicts a positive (1) outcome but in actuality the data point was negative (0). We do not want this quadrant to have a high number.
+                    - The lower left quadrant is False Negatives, which are the points which the model predicts to be negative (0) but are actually positive (1). We want to limit this number as well.
+                    - Finally, the lower right quadrant is the True Positives where the model predicts a positive (1) outcome and it is actually positive (1). We want to maximize True Positives and True Negatives because that means the model is good at classifying.
+                    """)
 
         # Classification Model
         st.subheader("Classification Report")
         st.text(classification_report(y_test, y_pred))
-        st.write("Precision here is the ratio of correctly predicted classes (True Positives) over the total predicted classes (True Positives + False Positives)." \
-        "Recall depicts the ratio of correctly predicted classes (True Positives) to all the data in the actual dataset class (True Positives + False Negatives)." \
-        "F1 Scores take into account precision and recall." \
-        "The overall accuracy score gives a solid idea of how good the model is at classifying data.")
+        st.markdown("""
+                    - Precision here is the ratio of correctly predicted classes (True Positives) over the total predicted classes (True Positives + False Positives).
+                    - Recall depicts the ratio of correctly predicted classes (True Positives) to all the data in the actual dataset class (True Positives + False Negatives).
+                    - F1 Scores take into account precision and recall.
+                    - The overall accuracy score gives a solid idea of how good the model is at classifying data.
+                    """)
 
         ### Additional Data Information Section ###
 
