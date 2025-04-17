@@ -26,7 +26,7 @@ def load_and_preprocess_data():
     # Option 1: Insert your own dataset
     if file == 'Upload csv.file':
         user_file = st.file_uploader('Upload a csv file', type = 'csv') # use streamlit widget for uploading files - set to only accepting csv
-        if user_file is not None: # if the user uploads a file then that will be set as the df variable
+        if user_file: # if the user uploads a file then that will be set as the df variable
             df = pd.read_csv(user_file)
     else:
         dataset_names = ['iris', 'titanic', 'penguins', 'taxis'] # curate what Seaborn datasets I want to allow users to choose from
@@ -82,10 +82,11 @@ def initialize_and_train_logistic_regression():
     return log_reg, y_pred
 
 # Create a visualization of Linear Regression Model
-def lin_reg_fig(X_test, y_test):
+def lin_reg_fig(X_test, y_test, y_pred):
     plt.scatter(X_test, y_test, color='blue')
     plt.plot(X_test, lin_reg, color='red')
     plt.title('Linear Regression Model')
+    plt.legend
     st.pyplot(plt)
     plt.clf()
 
@@ -93,10 +94,9 @@ def lin_reg_fig(X_test, y_test):
 def lin_reg_metrics(y_test, y_pred):
     rmse_lin = root_mean_squared_error(y_test, y_pred)
     r2_lin = r2_score(y_test, y_pred)
-    print("Unscaled Data Model:")
-    print(f"Root Squred Error: {rmse_lin:.2f}")
-    print(f"R^2 Score: {r2_lin:.2f}")
-    return rmse_lin, r2_lin
+    st.write("Linear Regression Model Metrics:")
+    st.write(f"Root Squred Error: {rmse_lin:.2f}")
+    st.write(f"R^2 Score: {r2_lin:.2f}")
 
 def plot_confusion_matrix(cm, title):
     plt.figure(figsize=(6,4))
