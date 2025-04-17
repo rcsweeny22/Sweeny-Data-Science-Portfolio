@@ -22,7 +22,7 @@ with tab1:
     
     In this app, you can:
     - Use one of Seaborn's pre-loaded datasets like Titanic, Penguins, or Taxis, or upload your own csv.file.
-    - Input different feature and target variables to explore the elements of K Nearest-Neighbors.
+    - Input different features and target variables to explore the elements of K Nearest-Neighbors.
     - Toggle between different parameters (k) to change the number of neighbors used to classify the data.
     - Compare between scaled and unscaled data.
     - Calculate the overall accuracy score as well as the F-1 score for each section of the Confusion Matrix.
