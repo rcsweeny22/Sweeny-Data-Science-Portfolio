@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report, root_mean_squared_error, r2_score
+from sklearn.metrics import confusion_matrix, classification_report, root_mean_squared_error, r2_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression, LogisticRegression
 
@@ -134,7 +134,7 @@ if data_type == "Scaled":
 if selected_model == 'Linear Regression':
     lin_reg, y_pred = initialize_and_train_linear_regression()
     st.subheader("Linear Regression Model")
-    lin_reg_fig(lin_reg, X_test, y_test)
+    lin_reg_fig(lin_reg)
     lin_reg_metrics(y_test, y_pred)
 
 elif selected_model == "Logistic Regression":
