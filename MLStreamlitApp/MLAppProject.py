@@ -130,10 +130,11 @@ with tab3:
         st.subheader("Confusion Matrix")
         cm = confusion_matrix(y_test, y_pred)
         plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
-        st.write("Confusion Matricies show the Actual values compared to the Predicted values. The upper left quadrant has the True Negatives, which means the number of datapoints the model predicts to be negative (0) and in actuality are negative (0)." \
-        "We want this quadrant to be high because that means it is good at correctly classifying negatives. The upper right quadrant is the False Positives, which means the model predicts a positive (1) outcome but in actuality the data point was negative (0)." \
-        "We do not want this quadrant to have a high number. The lower left quadrant is False Negatives, which are the points which the model predicts to be negative (0) but are actually positive (1). We want to limit this number as well." \
-        "Finally, the lower right quadrant is the True Positives where the model predicts a positive (1) outcome and it is actually positive (1). We want to maximize True Positives and True Negatives because that means the model is good at classifying.")
+        st.markdown("Confusion Matricies show the Actual values compared to the Predicted values." \
+        "- The upper left quadrant has the True Negatives, which means the number of datapoints the model predicts to be negative (0) and in actuality are negative (0). We want this quadrant to be high because that means it is good at correctly classifying negatives." \
+        "- The upper right quadrant is the False Positives, which means the model predicts a positive (1) outcome but in actuality the data point was negative (0). We do not want this quadrant to have a high number." \
+        "- The lower left quadrant is False Negatives, which are the points which the model predicts to be negative (0) but are actually positive (1). We want to limit this number as well." \
+        "- Finally, the lower right quadrant is the True Positives where the model predicts a positive (1) outcome and it is actually positive (1). We want to maximize True Positives and True Negatives because that means the model is good at classifying.")
 
         # Classification Model
         st.subheader("Classification Report")
