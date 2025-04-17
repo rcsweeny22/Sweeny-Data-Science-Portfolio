@@ -5,7 +5,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression, LogisticRegression
 
@@ -69,6 +70,11 @@ def initialize_and_train_logistic_regression():
     y_pred = log_reg.predict(X_test) #this is putting the 20% of our X_test into model & getting what the model predicts the y-value is
     return log_reg, y_pred
 
+def train_knn(X_train, y_train, n_neighbors):
+    knn = KNeighborsClassifier(n_neighbors=n_neighbors)
+    knn.fit(X_train, y_train)
+    return knn
+
 # Confusion Matrix
 def plot_confusion_matrix(cm, title):
     plt.figure(figsize=(6,4))
@@ -84,6 +90,7 @@ def plot_confusion_matrix(cm, title):
 # Selection controls at the top - Create two columns for side-by-side display
 st.subheader("Logistic Regression Model")
 st.subheader("Data Type")
+k = st.slider("Select number of neighbors (k, odd values only)", min_value=1, max_value=21, step=2, value=5)
 data_type = st.radio("Choose a type of data:", options=["Unscaled", "Scaled"])
 
 # Load and preprocess the data; split into training and testing sets
@@ -100,6 +107,18 @@ if data_type == "Scaled":
 log_reg, y_pred = initialize_and_train_logistic_regression()
 col1, col2 = st.columns(2)
 
+# Train KNN with the selected k value
+knn_model = train_knn(X_train, y_train, n_neighbors=k)
+if data_type == "Scaled":
+    st.write(f"**Scaled Data: KNN (k = {k})**")
+else:
+    st.write(f"**Unscaled Data: KNN (k = {k})**")
+
+# Predict and evaluate
+y_pred = knn_model.predict(X_test)
+accuracy_val = accuracy_score(y_test, y_pred)
+st.write(f"**Accuracy: {accuracy_val:.2f}**")
+
 with col1:
     st.subheader("Confusion Matrix")
     cm = confusion_matrix(y_test, y_pred)
@@ -108,6 +127,7 @@ with col1:
 with col2:
     st.subheader("Classification Report")
     st.text(classification_report(y_test, y_pred))
+
 
 
 # Training data and displaying results
