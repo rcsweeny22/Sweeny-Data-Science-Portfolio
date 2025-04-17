@@ -27,6 +27,7 @@ with tab1:
     - Compare between scaled and unscaled data.
     - Calculate the overall accuracy score as well as the F-1 score for each section of the Confusion Matrix.
     """)
+    st.error("Warning: You might get an error message until you go to the second tab and input a continuous variable for features.")
 
 ### Download or Upload DataSet ###
 
@@ -69,9 +70,12 @@ with tab2:
         return train_test_split(X, y, test_size=test_size, random_state=random_state)
 
     def train_knn(X_train, y_train, n_neighbors): # train k nearest neighbors with training data
-        knn = KNeighborsClassifier(n_neighbors=n_neighbors) # import KNeighborsClassifier
-        knn.fit(X_train, y_train) # fit knn to the data
-        return knn
+        if X_train is None:
+            return st.write("Please upload a dataset.")
+        else:
+            knn = KNeighborsClassifier(n_neighbors=n_neighbors) # import KNeighborsClassifier
+            knn.fit(X_train, y_train) # fit knn to the data
+            return knn
 
     # Confusion Matrix
     def plot_confusion_matrix(cm, title): # plot the confusion matrix
@@ -112,42 +116,47 @@ with tab2:
             scaler = StandardScaler()
             X_train = scaler.fit_transform(X_train)
             X_test = scaler.transform(X_test)
+    else:
+        st.write("Please upload a dataset.")
 
 with tab3:
-        # Train KNN with the selected k value
-        knn_model = train_knn(X_train, y_train, n_neighbors=k)
-        if data_type == "Scaled":
-            st.write(f"**Scaled Data: KNN (k = {k})**")
+        if X_train is None:
+            st.write("Please upload a dataset.")
         else:
-            st.write(f"**Unscaled Data: KNN (k = {k})**")
+            # Train KNN with the selected k value
+            knn_model = train_knn(X_train, y_train, n_neighbors=k)
+            if data_type == "Scaled":
+                st.write(f"**Scaled Data: KNN (k = {k})**")
+            else:
+                st.write(f"**Unscaled Data: KNN (k = {k})**")
 
-        # Predict and evaluate
+            # Predict and evaluate
 
-        y_pred = knn_model.predict(X_test)
-        accuracy_val = accuracy_score(y_test, y_pred) # train accuracy score
-        st.write(f"**Accuracy: {accuracy_val:.2f}**")
+            y_pred = knn_model.predict(X_test)
+            accuracy_val = accuracy_score(y_test, y_pred) # train accuracy score
+            st.write(f"**Accuracy: {accuracy_val:.2f}**")
 
-        # Confusion Matrix
-        st.subheader("Confusion Matrix")
-        cm = confusion_matrix(y_test, y_pred)
-        plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
-        st.markdown("""
-                    ### Confusion Matricies show the Actual values compared to the Predicted values.
-                    - The upper left quadrant has the True Negatives, which means the number of datapoints the model predicts to be negative (0) and in actuality are negative (0). We want this quadrant to be high because that means it is good at correctly classifying negatives.
-                    - The upper right quadrant is the False Positives, which means the model predicts a positive (1) outcome but in actuality the data point was negative (0). We do not want this quadrant to have a high number.
-                    - The lower left quadrant is False Negatives, which are the points which the model predicts to be negative (0) but are actually positive (1). We want to limit this number as well.
-                    - Finally, the lower right quadrant is the True Positives where the model predicts a positive (1) outcome and it is actually positive (1). We want to maximize True Positives and True Negatives because that means the model is good at classifying.
-                    """) # explain matix so any user can understand
+            # Confusion Matrix
+            st.subheader("Confusion Matrix")
+            cm = confusion_matrix(y_test, y_pred)
+            plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
+            st.markdown("""
+                        ### Confusion Matricies show the Actual values compared to the Predicted values.
+                        - The upper left quadrant has the True Negatives, which means the number of datapoints the model predicts to be negative (0) and in actuality are negative (0). We want this quadrant to be high because that means it is good at correctly classifying negatives.
+                        - The upper right quadrant is the False Positives, which means the model predicts a positive (1) outcome but in actuality the data point was negative (0). We do not want this quadrant to have a high number.
+                        - The lower left quadrant is False Negatives, which are the points which the model predicts to be negative (0) but are actually positive (1). We want to limit this number as well.
+                        - Finally, the lower right quadrant is the True Positives where the model predicts a positive (1) outcome and it is actually positive (1). We want to maximize True Positives and True Negatives because that means the model is good at classifying.
+                        """) # explain matix so any user can understand
 
-        # Classification Report
-        st.subheader("Classification Report")
-        st.text(classification_report(y_test, y_pred))
-        st.markdown("""
-                    - Precision here is the ratio of correctly predicted classes (True Positives) over the total predicted classes (True Positives + False Positives).
-                    - Recall depicts the ratio of correctly predicted classes (True Positives) to all the data in the actual dataset class (True Positives + False Negatives).
-                    - F1 Scores take into account precision and recall.
-                    - The overall accuracy score gives a solid idea of how good the model is at classifying data.
-                    """) # explain the different metrics
+            # Classification Report
+            st.subheader("Classification Report")
+            st.text(classification_report(y_test, y_pred))
+            st.markdown("""
+                        - Precision here is the ratio of correctly predicted classes (True Positives) over the total predicted classes (True Positives + False Positives).
+                        - Recall depicts the ratio of correctly predicted classes (True Positives) to all the data in the actual dataset class (True Positives + False Negatives).
+                        - F1 Scores take into account precision and recall.
+                        - The overall accuracy score gives a solid idea of how good the model is at classifying data.
+                        """) # explain the different metrics
 
 ### Additional Data Information Section ###
 
