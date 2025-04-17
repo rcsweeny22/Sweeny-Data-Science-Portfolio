@@ -9,6 +9,19 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.preprocessing import StandardScaler
 
+with st.sidebar():
+        st.markdown("""
+        #### How to use this app:
+        - Step 1. Read all instructions - this app showcases KNN which is best used for classification tasks.
+        - Step 2. Navigate to the top of the app and find the 4 tabs.
+        - Step 3. After reading the 'General App Information,' select the 'User Input' tab.
+        - Step 4. Choose the number of k neighbors and data type.
+        - Step 5. Select a Seaborn dataset or upload a csv.file.
+        - Step 6. Choose features and a target variable.
+        - Step 7. Navigate to the 'Model Accuracy' tab and explore.
+        - Step 8. Go to the last tab, 'Additional Data Information.' 
+        """)
+
 tab1, tab2, tab3, tab4 = st.tabs(["General App Information","User Input", "Model Accuracy","Additional Data Information"]) # Organize app into different tabs
 
 with tab1:
@@ -22,18 +35,6 @@ with tab1:
     - Input different feature and target variables to explore the elements of Logistic Regression models.
     - Discover binary classification results after selecting categorical and continuous variables for feature and target variables.
     """)
-    with st.sidebar():
-        st.markdown("""
-        #### How to use this app:
-        - Step 1. Read all instructions - this app showcases KNN which is best used for classification tasks.
-        - Step 2. Navigate to the top of the app and find the 4 tabs.
-        - Step 3. After reading the 'General App Information,' select the 'User Input' tab.
-        - Step 4. Choose the number of k neighbors and data type.
-        - Step 5. Select a Seaborn dataset or upload a csv.file.
-        - Step 6. Choose features and a target variable.
-        - Step 7. Navigate to the 'Model Accuracy' tab and explore.
-        - Step 8. Go to the last tab, 'Additional Data Information.' 
-        """)
 
 ### Download or Upload DataSet ###
 with tab2:
