@@ -15,12 +15,25 @@ with tab1:
     st.title("Machine Learning Application: KNN Performance")
     st.markdown("""
     ### About This Application
-    This interactive application demonstrates the different elements of Logistic Regression.
+    This interactive application demonstrates the different elements of K Nearest-Neighbors (KNN).
+    KNN is a classification model that uses 
     You can:
     - Use one of Seaborn's pre-loaded datasets like the Titanic, Penguins, or Taxis dataset, or upload your own csv.file!
     - Input different feature and target variables to explore the elements of Logistic Regression models.
     - Discover binary classification results after selecting categorical and continuous variables for feature and target variables.
     """)
+    with st.sidebar():
+        st.markdown("""
+        #### How to use this app:
+        - Step 1. Read all instructions - this app showcases KNN which is best used for classification tasks.
+        - Step 2. Navigate to the top of the app and find the 4 tabs.
+        - Step 3. After reading the 'General App Information,' select the 'User Input' tab.
+        - Step 4. Choose the number of k neighbors and data type.
+        - Step 5. Select a Seaborn dataset or upload a csv.file.
+        - Step 6. Choose features and a target variable.
+        - Step 7. Navigate to the 'Model Accuracy' tab and explore.
+        - Step 8. Go to the last tab, 'Additional Data Information.' 
+        """)
 
 ### Download or Upload DataSet ###
 with tab2:
