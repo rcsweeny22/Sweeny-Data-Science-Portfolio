@@ -48,15 +48,13 @@ def features_and_target_data(df, features, target_var):
                 ### Important Instructions:
                 ###### For Logistic Regression models make sure to select categorical or continuous variables for the features and a categorical variable for the target.
                  """)
-
-    if not features:
+    
+    if features == None:
         st.error("Please choose at least one feature.")
         return False
     if target_var in features:
         st.error("Target variable cannot be a selected feature variable.")
         return False
-    return False
-
 
 def split_data(X, y, test_size=0.2, random_state=42): # random state allows for replicated results - improves user experience
     return train_test_split(X, y, test_size=test_size, random_state=random_state)
@@ -94,9 +92,9 @@ if df is not None:
     # Choosing target variable
     target_var = st.selectbox("Choose the target variable", options = df.columns)
 
-    if features_and_target_data(df, features, target_var):
-        X = df[features]
-        y = df[target_var]
+    features_and_target_data(df, features, target_var)
+    X = df[features]
+    y = df[target_var]
 
     X_train, X_test, y_train, y_test = split_data(X, y)
 
@@ -109,13 +107,12 @@ if df is not None:
     # Train KNN with the selected k value
     knn_model = train_knn(X_train, y_train, n_neighbors=k)
     if data_type == "Scaled":
-     st.write(f"**Scaled Data: KNN (k = {k})**")
+        st.write(f"**Scaled Data: KNN (k = {k})**")
     else:
-     st.write(f"**Unscaled Data: KNN (k = {k})**")
+        st.write(f"**Unscaled Data: KNN (k = {k})**")
 
     # Predict and evaluate
     y_pred = knn_model.predict(X_test)
-
     accuracy_val = accuracy_score(y_test, y_pred)
     st.write(f"**Accuracy: {accuracy_val:.2f}**")
 
@@ -132,7 +129,7 @@ if df is not None:
 
     ### Additional Data Information Section ###
 
-    st.expander("Click to view Data Information")
+with st.expander("Click to view Data Information"):
     st.write("#### First 5 Rows of the Dataset")
     st.dataframe(df.head())
     st.write("#### Statistical Summary")
