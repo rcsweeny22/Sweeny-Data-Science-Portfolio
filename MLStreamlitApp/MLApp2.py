@@ -98,11 +98,11 @@ if data_type == "Scaled":
     X_test = scaler.transform(X_test)
 
 # Training data and displaying results
+log_reg, y_pred = initialize_and_train_logistic_regression()
 col1, col2 = st.columns(2)
 
 with col1:
     st.subheader("Confusion Matrix")
-    log_reg, y_pred = initialize_and_train_logistic_regression()
     cm = confusion_matrix(y_test, y_pred)
     plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
 
