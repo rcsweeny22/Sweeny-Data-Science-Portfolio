@@ -23,6 +23,7 @@ You can:
 
 def load_and_preprocess_data():
     file = st.radio("Choose a pre-loaded dataset from Seaborn or upload your own csv.file", options = ['Seaborn dataset', 'Upload csv.file'])
+    df = None
     # Option 1: Insert your own dataset
     if file == 'Seaborn dataset':
         dataset_names = ['iris', 'titanic', 'penguins', 'taxis'] # curate what Seaborn datasets I want to allow users to choose from
@@ -35,25 +36,26 @@ def load_and_preprocess_data():
             df = pd.read_csv(user_file)
 
     # Display dataset
-    st.dataframe(df)
+    if df is not None:
+        st.dataframe(df)
+        # Remove rows with missing values
+        df.dropna(inplace=True)
+    return df
 
-    # Remove rows with missing values
-    df.dropna(inplace=True)
-
+def features_and_target_data(df, features, target_var):
     # Define features and target
     st.markdown("""
                 ### Important Instructions:
                 ###### For Logistic Regression models make sure to select categorical or continuous variables for the features and a categorical variable for the target.
                  """)
-    
-    # Choosing features
-    features = st.multiselect("Choose features here", options = df.columns) # grab the columns so they have drop down of column names
 
-    # Choosing target variable
-    target_var = st.selectbox("Choose your target variable here (target variable cannot be one of selected feature variables)", options = df.columns)
-    X = df[features]
-    y = df[target_var]
-    return df, X, y, features
+    if not features:
+        st.error("Please choose at least one feature.")
+        return False
+    if target_var in features:
+        st.error("Target variable cannot be a selected feature variable.")
+        return False
+    return False
 
 
 def split_data(X, y, test_size=0.2, random_state=42): # random state allows for replicated results - improves user experience
@@ -78,49 +80,64 @@ def plot_confusion_matrix(cm, title):
 
 # Selection controls at the top
 st.markdown("### Select Parameters")
-k = st.slider("Select number of neighbors (k, odd values only)", min_value=1, max_value=21, step=2, value=5)
+k = st.slider("Select number of neighbors (k, odd values only)", min_value=1, max_value=11, step=2, value=5)
 data_type = st.radio("Data Type", options=["Unscaled", "Scaled"])
 
 # Load and preprocess the data; split into training and testing sets
-df, X, y, features = load_and_preprocess_data()
-X_train, X_test, y_train, y_test = split_data(X, y)
+df = load_and_preprocess_data()
+if df is not None:
+    st.markdown("### Select Feature and Target Variables")
+    
+    # Choosing features
+    features = st.multiselect("Choose features", options = df.columns) # grab the columns so they have drop down of column names
 
-# Depending on the toggle, optionally scale the data
-if data_type == "Scaled":
-    scaler = StandardScaler()
-    X_train = scaler.fit_transform(X_train)
-    X_test = scaler.transform(X_test)
+    # Choosing target variable
+    target_var = st.selectbox("Choose the target variable", options = df.columns)
 
-# Train KNN with the selected k value
-knn_model = train_knn(X_train, y_train, n_neighbors=k)
-if data_type == "Scaled":
-    st.write(f"**Scaled Data: KNN (k = {k})**")
-else:
-    st.write(f"**Unscaled Data: KNN (k = {k})**")
+    if features_and_target_data(df, features, target_var):
+        X = df[features]
+        y = df[target_var]
 
-# Predict and evaluate
-y_pred = knn_model.predict(X_test)
-accuracy_val = accuracy_score(y_test, y_pred)
-st.write(f"**Accuracy: {accuracy_val:.2f}**")
+    df, X, y, features = load_and_preprocess_data()
+    X_train, X_test, y_train, y_test = split_data(X, y)
 
-# Create two columns for side-by-side display
-col1, col2 = st.columns(2)
-with col1:
-    st.subheader("Confusion Matrix")
-    cm = confusion_matrix(y_test, y_pred)
-    plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
+    # Depending on the toggle, optionally scale the data
+    if data_type == "Scaled":
+        scaler = StandardScaler()
+        X_train = scaler.fit_transform(X_train)
+        X_test = scaler.transform(X_test)
 
-with col2:
-    st.subheader("Classification Report")
-    st.text(classification_report(y_test, y_pred))
+    # Train KNN with the selected k value
+    knn_model = train_knn(X_train, y_train, n_neighbors=k)
+    if data_type == "Scaled":
+     st.write(f"**Scaled Data: KNN (k = {k})**")
+    else:
+     st.write(f"**Unscaled Data: KNN (k = {k})**")
 
-### Additional Data Information Section ###
+    # Predict and evaluate
+    y_pred = knn_model.predict(X_test)
 
-st.expander("Click to view Data Information")
-st.write("#### First 5 Rows of the Dataset")
-st.dataframe(df.head())
-st.write("#### Statistical Summary")
-st.dataframe(df.describe())
+    accuracy_val = accuracy_score(y_test, y_pred)
+    st.write(f"**Accuracy: {accuracy_val:.2f}**")
 
-### User Review ###
-st.feedback('stars')
+    # Create two columns for side-by-side display
+    col1, col2 = st.columns(2)
+    with col1:
+        st.subheader("Confusion Matrix")
+        cm = confusion_matrix(y_test, y_pred)
+        plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
+
+    with col2:
+     st.subheader("Classification Report")
+     st.text(classification_report(y_test, y_pred))
+
+    ### Additional Data Information Section ###
+
+    st.expander("Click to view Data Information")
+    st.write("#### First 5 Rows of the Dataset")
+    st.dataframe(df.head())
+    st.write("#### Statistical Summary")
+    st.dataframe(df.describe())
+
+    ### User Review ###
+    st.feedback('stars')
