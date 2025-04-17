@@ -27,7 +27,9 @@
 ### Send this link[] to family and friends and spread the ML love!
 
 ### 🖥️ Overview:
-- In this project I created a Streamlit app that is accessible to anyone on my Stremlit Community Cloud account.
+- In this project I created a Streamlit app that is accessible to anyone who uses this <link>. By using either a pre-loaded Seaborn dataset such as Iris, Titanic, Penguins, or Taxis, or uploading your own csv.file, users are able to explore the different dimensions on Logistic Regression.
+- Logistic Regression is a form of machine learning that is used when the features of a dataset influence the probability of a certain outcome happening. When working with Logistic Regression, the features are numeric or encoded categorical and the target is always categorical.
+- Logistic regression has performance metrics such as accuracy, precision, recall, and F1-scores which users can explore on this app. Confusion matrices are also avilable for users to visualize the amount of data which was predicted correctly and falsely by the trained model.
 
 ### 💡Relationship: 
-- 
+- As a third update to my portfolio, this project was a great way to continue on my journey learning the foundations of data science. This Streamlit App is much more complex than my previous work, but also more accessible. Hopefully by building off of my previous app experience and tidy data skills, this app makes Logistic Regression more exciting for users!
