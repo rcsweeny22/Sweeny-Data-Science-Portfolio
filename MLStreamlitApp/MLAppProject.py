@@ -60,10 +60,10 @@ with tab2:
         # Define features and target
         if features == None: # require user to input at least on feature
             st.error("Please choose at least one feature.") # give error message if no features are selected
-            return False
+            
         if target_var in features: # if the user accidentally makes one of their features the target variable too
             st.error("Target variable cannot be a selected feature variable.") # give error message
-            return False
+            
 
     def split_data(X, y, test_size=0.2, random_state=42): # random state allows for replicated results - improves user experience
         return train_test_split(X, y, test_size=test_size, random_state=random_state)
