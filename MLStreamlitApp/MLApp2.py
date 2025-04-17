@@ -98,7 +98,6 @@ if df is not None:
         X = df[features]
         y = df[target_var]
 
-    df, X, y, features = load_and_preprocess_data()
     X_train, X_test, y_train, y_test = split_data(X, y)
 
     # Depending on the toggle, optionally scale the data
