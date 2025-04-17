@@ -142,4 +142,5 @@ with tab4:
     st.dataframe(df.describe())
 
     ### User Review ###
+    st.write("Rate this app!")
     st.feedback('stars')
