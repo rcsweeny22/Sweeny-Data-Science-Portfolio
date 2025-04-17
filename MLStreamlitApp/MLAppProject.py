@@ -16,11 +16,12 @@ with tab1:
     st.markdown("""
     ### About This Application
     This interactive application demonstrates the different elements of K Nearest-Neighbors (KNN).
-    KNN is a classification model that uses 
+    KNN is a classification model that calculates the distance between all tarining dataset examples and the new data point that users want to classify. By identifying the k nearest neighbors, the model is able to assign the new data point a class based on the class of the majority of it's neighbors.
     You can:
-    - Use one of Seaborn's pre-loaded datasets like the Titanic, Penguins, or Taxis dataset, or upload your own csv.file!
+    - Use one of Seaborn's pre-loaded datasets like the Titanic, Penguins, or Taxis, or upload your own csv.file.
     - Input different feature and target variables to explore the elements of Logistic Regression models.
-    - Discover binary classification results after selecting categorical and continuous variables for feature and target variables.
+    - Toggle between different parameters (k) to change the number of neighbors used to classify.
+    - Calculate the overall accuracy score as well as the F-1 score for each section of the Confusion Matrix.
     """)
 
 ### Download or Upload DataSet ###
