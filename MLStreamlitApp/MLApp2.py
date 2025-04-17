@@ -29,6 +29,7 @@ with tab2:
                     ### Important Instructions:
                     ###### For KNN, make sure to select categorical or continuous variables for the features and a categorical variable for the target.
                     """)
+        st.image("C:\Users\rcswe\Downloads\KNN_image.png")
         file = st.radio("Choose a pre-loaded dataset from Seaborn or upload your own csv.file", options = ['Seaborn dataset', 'Upload csv.file'])
         df = None
         # Option 1: Insert your own dataset
