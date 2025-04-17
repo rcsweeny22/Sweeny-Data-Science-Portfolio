@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix, classification_report, root_mean_squared_error,r2_score
+from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression, LogisticRegression
 
@@ -90,33 +90,6 @@ data_type = st.radio("Choose a type of data:", options=["Unscaled", "Scaled"])
 df, X, y, features = load_and_preprocess_data()
 X_train, X_test, y_train, y_test = split_data(X, y)
 
-# Initialize and train the linear regression model on unscaled data
-def initialize_and_train_linear_regression():
-    # Initialize class (getting it ready)
-    lin_reg = LinearRegression()
-    # Train our data ('fit' method changes this class automatically)
-    lin_reg.fit(X_train, y_train)
-    # Make predictions on the test set
-    y_pred = lin_reg.predict(X_test) #this is putting the 20% of our X_test into model & getting what the model predicts the y-value is
-    return lin_reg, y_pred
-
-# Create a visualization of Linear Regression Model
-def lin_reg_fig(X_test, y_test):
-    plt.scatter(X_test, y_test, color='blue')
-    plt.plot(X_test, lin_reg, color='red')
-    plt.title('Linear Regression Model')
-    plt.legend
-    st.pyplot(plt)
-    plt.clf()
-
-# Evaluate Linear Regression Model's Metrics
-def lin_reg_metrics(y_test, y_pred):
-    rmse_lin = root_mean_squared_error(y_test, y_pred)
-    r2_lin = r2_score(y_test, y_pred)
-    st.write("Linear Regression Model Metrics:")
-    st.write(f"Root Squred Error: {rmse_lin:.2f}")
-    st.write(f"R^2 Score: {r2_lin:.2f}")
-
 # Depending on the toggle, optionally scale the data
 if data_type == "Scaled":
     scaler = StandardScaler()
@@ -140,25 +113,14 @@ with col2:
 # Training data and displaying results
 selected_model = st.radio("Choose a type of Regression Model:", options = ["Linear Regression", "Logistic Regression"])
 
-if selected_model == 'Linear Regression':
-    if not all(pd.api.types.is_numeric_dtype(X[col]) for col in features):
-        st.warning("Linear Regression requires all numeric feature variables. Please change your selection.")
-    elif not pd.api.types.is_numeric_dtype(y):
-        st.warning("Linear Regression requires a numeric target variable. Please change your selection.")
-    else:
-        lin_reg, y_pred = initialize_and_train_linear_regression()
-        lin_reg_fig(lin_reg)
-        lin_reg_metrics(y_test, y_pred)
-
-elif selected_model == "Logistic Regression":
-    if y.nunique() > 3:
-        st.warning("Logistic Regression requires a target variable with 3 or less components. Please change your selection.")
-    elif not pd.api.types.is_numeric_dtype(y):
-        st.warning("Logistic Regression requires a categorical target variable. Please change your selection.")
-    else:
-        log_reg, y_pred = initialize_and_train_logistic_regression()
-        cm = confusion_matrix(y_test, y_pred)
-        plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
+if y.nunique() > 3:
+    st.warning("Logistic Regression requires a target variable with 3 or less components. Please change your selection.")
+elif not pd.api.types.is_numeric_dtype(y):
+    st.warning("Logistic Regression requires a categorical target variable. Please change your selection.")
+else:
+    log_reg, y_pred = initialize_and_train_logistic_regression()
+    cm = confusion_matrix(y_test, y_pred)
+    plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
 
 
 ### Additional Data Information Section ###
