@@ -5,12 +5,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression, LogisticRegression
 
-st.title("Machine Learning ML Application")
+st.title("Machine Learning Application: KNN Performance")
 st.markdown("""
 ### About This Application
 This interactive application demonstrates the different elements of Logistic Regression.
@@ -60,16 +59,6 @@ def load_and_preprocess_data():
 def split_data(X, y, test_size=0.2, random_state=42): # random state allows for replicated results - improves user experience
     return train_test_split(X, y, test_size=test_size, random_state=random_state)
 
-# Initialize and train a logistic regression model on unscaled data
-def initialize_and_train_logistic_regression():
-    # Initialize class (getting it ready)
-    log_reg = LogisticRegression()
-    # Train our data ('fit' method changes this class automatically)
-    log_reg.fit(X_train, y_train)
-    # Make predictions on the test set
-    y_pred = log_reg.predict(X_test) #this is putting the 20% of our X_test into model & getting what the model predicts the y-value is
-    return log_reg, y_pred
-
 def train_knn(X_train, y_train, n_neighbors):
     knn = KNeighborsClassifier(n_neighbors=n_neighbors)
     knn.fit(X_train, y_train)
@@ -87,11 +76,10 @@ def plot_confusion_matrix(cm, title):
 
 ### Streamlit App Layout ###
 
-# Selection controls at the top - Create two columns for side-by-side display
-st.subheader("Logistic Regression Model")
-st.subheader("Data Type")
+# Selection controls at the top
+st.markdown("### Select Parameters")
 k = st.slider("Select number of neighbors (k, odd values only)", min_value=1, max_value=21, step=2, value=5)
-data_type = st.radio("Choose a type of data:", options=["Unscaled", "Scaled"])
+data_type = st.radio("Data Type", options=["Unscaled", "Scaled"])
 
 # Load and preprocess the data; split into training and testing sets
 df, X, y, features = load_and_preprocess_data()
@@ -102,10 +90,6 @@ if data_type == "Scaled":
     scaler = StandardScaler()
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
-
-# Training data and displaying results
-log_reg, y_pred = initialize_and_train_logistic_regression()
-col1, col2 = st.columns(2)
 
 # Train KNN with the selected k value
 knn_model = train_knn(X_train, y_train, n_neighbors=k)
@@ -119,6 +103,8 @@ y_pred = knn_model.predict(X_test)
 accuracy_val = accuracy_score(y_test, y_pred)
 st.write(f"**Accuracy: {accuracy_val:.2f}**")
 
+# Create two columns for side-by-side display
+col1, col2 = st.columns(2)
 with col1:
     st.subheader("Confusion Matrix")
     cm = confusion_matrix(y_test, y_pred)
@@ -127,21 +113,6 @@ with col1:
 with col2:
     st.subheader("Classification Report")
     st.text(classification_report(y_test, y_pred))
-
-
-
-# Training data and displaying results
-selected_model = st.radio("Choose a type of Regression Model:", options = ["Linear Regression", "Logistic Regression"])
-
-if y.nunique() > 3:
-    st.warning("Logistic Regression requires a target variable with 3 or less components. Please change your selection.")
-elif not pd.api.types.is_numeric_dtype(y):
-    st.warning("Logistic Regression requires a categorical target variable. Please change your selection.")
-else:
-    log_reg, y_pred = initialize_and_train_logistic_regression()
-    cm = confusion_matrix(y_test, y_pred)
-    plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
-
 
 ### Additional Data Information Section ###
 
