@@ -23,8 +23,8 @@
 ### 	:bulb: Relationship:
 - This Tidy Data Project adds a lot of depth to my overall coding portfolio because it allows me to showcase my skills for manipulating and cleaning a dataset, which is a job that many data analysts are tasked with in the real world. Often tidying data can be the bulk of the work a data analyst or scientist has to accomplish so in order to eventually work on analyzing data which is also important, this fundamental data work of tidying is absoluetly crucial. Data in the real world is not going to come in a neat, read-able format, so we have the responsibility of manipulating and tidying the messy and real information.
 
-## Project 3 - Machine Learning Application: KNN :calling:
-### Send this link[] to family and friends and spread the Classification Model love!
+## Project 3 - Machine Learning: [My k Nearest-Neighbors App](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/MLStreamlitApp) :calling:
+### Send this [link](https://sweeny-data-science-portfolio-cu5pwrtpvbf7habq472ote.streamlit.app/) to family and friends and spread the Classification Model love!
 
 ### 🖥️ Overview:
 - In this project I created a Streamlit app that is accessible to anyone who uses this <link>. By using either a pre-loaded Seaborn dataset such as Titanic, Penguins, or Taxis, or uploading your own csv.file, users are able to explore the different dimensions of K Nearest Neighbors (KNN).
