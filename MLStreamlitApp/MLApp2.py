@@ -9,7 +9,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.preprocessing import StandardScaler
 
-tab1, tab2, tab3, tab4 = st.tabs(["General App Information","User Input", "Model Accuracy","Additional Data Information"])
+tab1, tab2, tab3, tab4 = st.tabs(["General App Information","User Input", "Model Accuracy","Additional Data Information"]) # Organize app into different tabs
 
 with tab1:
     st.title("Machine Learning Application: KNN Performance")
@@ -25,6 +25,10 @@ with tab1:
 ### Download or Upload DataSet ###
 with tab2:
     def load_and_preprocess_data():
+        st.markdown("""
+                    ### Important Instructions:
+                    ###### For KNN, make sure to select categorical or continuous variables for the features and a categorical variable for the target.
+                    """)
         file = st.radio("Choose a pre-loaded dataset from Seaborn or upload your own csv.file", options = ['Seaborn dataset', 'Upload csv.file'])
         df = None
         # Option 1: Insert your own dataset
@@ -47,13 +51,8 @@ with tab2:
 
     def features_and_target_data(df, features, target_var):
         # Define features and target
-        st.markdown("""
-                    ### Important Instructions:
-                    ###### For Logistic Regression models make sure to select categorical or continuous variables for the features and a categorical variable for the target.
-                    """)
-        
-        if features == None:
-            st.error("Please choose at least one feature.")
+        if features == None: # require user to input at least on feature
+            st.error("Please choose at least one feature.") # give error message if no features are selected
             return False
         if target_var in features:
             st.error("Target variable cannot be a selected feature variable.")
@@ -115,6 +114,7 @@ with tab2:
             st.write(f"**Unscaled Data: KNN (k = {k})**")
 
         # Predict and evaluate
+
         y_pred = knn_model.predict(X_test)
         accuracy_val = accuracy_score(y_test, y_pred)
         st.write(f"**Accuracy: {accuracy_val:.2f}**")
