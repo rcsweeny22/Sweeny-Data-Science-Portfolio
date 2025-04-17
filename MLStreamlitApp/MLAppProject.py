@@ -16,13 +16,15 @@ with tab1:
     st.markdown("""
     ### About This Application
     This interactive application demonstrates the different elements of K Nearest-Neighbors (KNN).
-    KNN is a classification model that calculates the distance between all tarining dataset examples and the new data point that users want to classify. By identifying the k nearest neighbors, the model is able to assign the new data point a class based on the class of the majority of it's neighbors.
+    KNN is a classification model that calculates the distance between all training dataset points and the new data point that users want to classify. By identifying the k nearest neighbors, the model is able to assign the new data point a class based on the class of the majority of it's neighbors.
     
     You should use KNN when your target variable is categorical and binary or multi-class. KNN depends upon the idea that data points near one another and with similar features have the same or similar outcomes. When using KNN in the real world, proper scaling is essential.        
-    You can:
-    - Use one of Seaborn's pre-loaded datasets like the Titanic, Penguins, or Taxis, or upload your own csv.file.
-    - Input different feature and target variables to explore the elements of Logistic Regression models.
-    - Toggle between different parameters (k) to change the number of neighbors used to classify.
+    
+    In this app, you can:
+    - Use one of Seaborn's pre-loaded datasets like Titanic, Penguins, or Taxis, or upload your own csv.file.
+    - Input different feature and target variables to explore the elements of K Nearest-Neighbors.
+    - Toggle between different parameters (k) to change the number of neighbors used to classify the data.
+    - Compare between scaled and unscaled data.
     - Calculate the overall accuracy score as well as the F-1 score for each section of the Confusion Matrix.
     """)
 
@@ -84,7 +86,7 @@ with tab2:
 
     # Selection controls at the top
     st.markdown("### Select Parameters")
-    k = st.slider("Select number of neighbors (k, odd values only)", min_value=1, max_value=11, step=2, value=5)
+    k = st.slider("Select the number of neighbors (k, odd numbers only)", min_value=1, max_value=11, step=2, value=5)
     data_type = st.radio("Data Type", options=["Unscaled", "Scaled"])
 
     # Load and preprocess the data; split into training and testing sets
@@ -130,10 +132,18 @@ with tab3:
             st.subheader("Confusion Matrix")
             cm = confusion_matrix(y_test, y_pred)
             plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
+            st.write("Confusion Matricies show the Actual values compared to the Predicted values. The upper left quadrant has the True Negatives, which means the number of datapoints the model predicts to be negative (0) and in actuality are negative (0)." \
+            "We want this quadrant to be high because that means it is good at correctly classifying negatives. The upper right quadrant is the False Positives, which means the model predicts a positive (1) outcome but in actuality the data point was negative (0)." \
+            "We do not want this quadrant to have a high number. The lower left quadrant is False Negatives, which are the points which the model predicts to be negative (0) but are actually positive (1). We want to limit this number as well." \
+            "Finally, the lower right quadrant is the True Positives where the model predicts a positive (1) outcome and it is actually positive (1). We want to maximize True Positives and True Negatives because that means the model is good at classifying.")
 
         with col2:
             st.subheader("Classification Report")
             st.text(classification_report(y_test, y_pred))
+            st.write("Precision here is the ratio of correctly predicted classes (True Positives) over the total predicted classes (True Positives + False Positives)." \
+            "Recall depicts the ratio of correctly predicted classes (True Positives) to all the data in the actual dataset class (True Positives + False Negatives)." \
+            "F1 Scores take into account precision and recall." \
+            "The overall accuracy score gives a solid idea of how good the model is at classifying data.")
 
         ### Additional Data Information Section ###
 
