@@ -82,7 +82,7 @@ def initialize_and_train_logistic_regression():
     return log_reg, y_pred
 
 # Create a visualization of Linear Regression Model
-def lin_reg_fig(X_test, y_test, y_pred):
+def lin_reg_fig(X_test, y_test):
     plt.scatter(X_test, y_test, color='blue')
     plt.plot(X_test, lin_reg, color='red')
     plt.title('Linear Regression Model')
@@ -98,6 +98,7 @@ def lin_reg_metrics(y_test, y_pred):
     st.write(f"Root Squred Error: {rmse_lin:.2f}")
     st.write(f"R^2 Score: {r2_lin:.2f}")
 
+# Confusion Matrix
 def plot_confusion_matrix(cm, title):
     plt.figure(figsize=(6,4))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
