@@ -106,6 +106,7 @@ with tab2:
             X_train = scaler.fit_transform(X_train)
             X_test = scaler.transform(X_test)
 
+with tab3:
         # Train KNN with the selected k value
         knn_model = train_knn(X_train, y_train, n_neighbors=k)
         if data_type == "Scaled":
@@ -119,19 +120,18 @@ with tab2:
         accuracy_val = accuracy_score(y_test, y_pred)
         st.write(f"**Accuracy: {accuracy_val:.2f}**")
 
-with tab3:
-    # Create two columns for side-by-side display
-    col1, col2 = st.columns(2)
-    with col1:
-        st.subheader("Confusion Matrix")
-        cm = confusion_matrix(y_test, y_pred)
-        plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
+        # Create two columns for side-by-side display
+        col1, col2 = st.columns(2)
+        with col1:
+            st.subheader("Confusion Matrix")
+            cm = confusion_matrix(y_test, y_pred)
+            plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
 
-    with col2:
-     st.subheader("Classification Report")
-     st.text(classification_report(y_test, y_pred))
+        with col2:
+            st.subheader("Classification Report")
+            st.text(classification_report(y_test, y_pred))
 
-    ### Additional Data Information Section ###
+        ### Additional Data Information Section ###
 
 with tab4:
     st.expander("Click to view Data Information")
