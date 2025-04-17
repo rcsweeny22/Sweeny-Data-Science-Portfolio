@@ -126,24 +126,22 @@ with tab3:
         accuracy_val = accuracy_score(y_test, y_pred)
         st.write(f"**Accuracy: {accuracy_val:.2f}**")
 
-        # Create two columns for side-by-side display
-        col1, col2 = st.columns(2)
-        with col1:
-            st.subheader("Confusion Matrix")
-            cm = confusion_matrix(y_test, y_pred)
-            plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
-            st.write("Confusion Matricies show the Actual values compared to the Predicted values. The upper left quadrant has the True Negatives, which means the number of datapoints the model predicts to be negative (0) and in actuality are negative (0)." \
-            "We want this quadrant to be high because that means it is good at correctly classifying negatives. The upper right quadrant is the False Positives, which means the model predicts a positive (1) outcome but in actuality the data point was negative (0)." \
-            "We do not want this quadrant to have a high number. The lower left quadrant is False Negatives, which are the points which the model predicts to be negative (0) but are actually positive (1). We want to limit this number as well." \
-            "Finally, the lower right quadrant is the True Positives where the model predicts a positive (1) outcome and it is actually positive (1). We want to maximize True Positives and True Negatives because that means the model is good at classifying.")
+        # Confusion Matrix
+        st.subheader("Confusion Matrix")
+        cm = confusion_matrix(y_test, y_pred)
+        plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
+        st.write("Confusion Matricies show the Actual values compared to the Predicted values. The upper left quadrant has the True Negatives, which means the number of datapoints the model predicts to be negative (0) and in actuality are negative (0)." \
+        "We want this quadrant to be high because that means it is good at correctly classifying negatives. The upper right quadrant is the False Positives, which means the model predicts a positive (1) outcome but in actuality the data point was negative (0)." \
+        "We do not want this quadrant to have a high number. The lower left quadrant is False Negatives, which are the points which the model predicts to be negative (0) but are actually positive (1). We want to limit this number as well." \
+        "Finally, the lower right quadrant is the True Positives where the model predicts a positive (1) outcome and it is actually positive (1). We want to maximize True Positives and True Negatives because that means the model is good at classifying.")
 
-        with col2:
-            st.subheader("Classification Report")
-            st.text(classification_report(y_test, y_pred))
-            st.write("Precision here is the ratio of correctly predicted classes (True Positives) over the total predicted classes (True Positives + False Positives)." \
-            "Recall depicts the ratio of correctly predicted classes (True Positives) to all the data in the actual dataset class (True Positives + False Negatives)." \
-            "F1 Scores take into account precision and recall." \
-            "The overall accuracy score gives a solid idea of how good the model is at classifying data.")
+        # Classification Model
+        st.subheader("Classification Report")
+        st.text(classification_report(y_test, y_pred))
+        st.write("Precision here is the ratio of correctly predicted classes (True Positives) over the total predicted classes (True Positives + False Positives)." \
+        "Recall depicts the ratio of correctly predicted classes (True Positives) to all the data in the actual dataset class (True Positives + False Negatives)." \
+        "F1 Scores take into account precision and recall." \
+        "The overall accuracy score gives a solid idea of how good the model is at classifying data.")
 
         ### Additional Data Information Section ###
 
