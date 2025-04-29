@@ -102,10 +102,6 @@ with tab2:
 
 ### Streamlit App Layout ###
 
-    # Selection controls at the top
-    st.markdown("### Select Parameters")
-    data_type = st.radio("Data Type", options=["Unscaled", "Scaled"]) # add radio selection for user to switch between unscaled and scaled data
-
     # Load and preprocess the data; split into training and testing sets
     df = load_and_preprocess_data()
     if df is not None: # if df has been defined
@@ -121,10 +117,9 @@ with tab2:
         X = df[features]
         y = df[target_var]
 
-        # Depending on toggle, data can be scaled or unscaled
-        if data_type == "Scaled":
-            scaler = StandardScaler()
-            X_std = scaler.fit_transform(X)
+        scaler = StandardScaler()
+        X_std = scaler.fit_transform(X)
+        
     else:
         st.write("Please upload a dataset.")
 
