@@ -5,161 +5,168 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix, classification_report, root_mean_squared_error, r2_score
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression, LogisticRegression
 
-st.title("Unsupervised Machine Learning Application")
-st.markdown("""
-### About This Application
-This interactive application demonstrates the different elements of Linear and Logistic Regression.
-You can:
-- Use your own dataset or one of Seaborn's pre-loaded datasets (Iris, Titanic, Penguins, or Taxis).
-- Input different numeric, continuous feature and target variables to explore the elements of predictive Linear Regression models.
-- Discover binary classification results from Logistic Rregression after selecting categorical and continuous variables for feature and target variables.
-""")
+tab1, tab2, tab3, tab4 = st.tabs(["General App Information","User Input", "Model Accuracy","Additional Data Information"]) # Organize app into different tabs
+
+with tab1:
+    st.title("Machine Learning Application: KNN Performance")
+    st.markdown("""
+    ### About This Application
+    This interactive application demonstrates the different elements of K Nearest-Neighbors (KNN).
+    KNN is a classification model that calculates the distance between all training dataset points and the new data point that users want to classify. By identifying the k nearest neighbors, the model is able to assign the new data point a class based on the class of the majority of it's neighbors.
+    
+    You should use KNN when your target variable is categorical and binary or multi-class. KNN depends upon the idea that data points near one another and with similar features have the same or similar outcomes. When using KNN in the real world, proper scaling is essential.        
+    
+    In this app, you can:
+    - Use one of Seaborn's pre-loaded datasets like Titanic, Penguins, or Taxis, or upload your own csv.file.
+    - Input different features and target variables to explore the elements of K Nearest-Neighbors.
+    - Toggle between different parameters to change the number of neighbors (k) used to classify the data.
+    - Compare between scaled and unscaled data.
+    - Calculate the overall accuracy score as well as the F-1 score for each section of the Confusion Matrix.
+    """)
+    st.error("Warning: You might get an error message until you go to the second tab and input a continuous variable for features.")
 
 ### Download or Upload DataSet ###
 
-def load_and_preprocess_data():
-    file = st.radio("Upload your own csv.file or choose a pre-loaded dataset from Seaborn", options = ['Upload csv.file', 'Seaborn dataset'])
-    # Option 1: Insert your own dataset
-    if file == 'Upload csv.file':
-        user_file = st.file_uploader('Upload a csv file', type = 'csv') # use streamlit widget for uploading files - set to only accepting csv
-        if user_file: # if the user uploads a file then that will be set as the df variable
-            df = pd.read_csv(user_file)
-    else:
-        dataset_names = ['iris', 'titanic', 'penguins', 'taxis'] # curate what Seaborn datasets I want to allow users to choose from
-        Seaborn_dataset = st.selectbox("Choose a Seaborn dataset:", dataset_names) # streamlit widget
-        if Seaborn_dataset:
-            df = sns.load_dataset(Seaborn_dataset)
+with tab2:
+    def load_and_preprocess_data(): #defining: loading and preprocessing data
+        st.markdown("""
+                    ### Important Instructions:
+                    ###### For KNN, make sure to select continuous numeric variables for the features and a categorical variable for the target.
+                    """)
+        file = st.radio("Choose a pre-loaded dataset from Seaborn or upload your own csv.file", options = ['Seaborn dataset', 'Upload csv.file']) # creates upload file option on Streamlit
+        df = None
+        # Option 1: Insert your own dataset
+        if file == 'Seaborn dataset': #begin with Seaborn datasets
+            dataset_names = ['titanic', 'penguins', 'taxis'] # curate what Seaborn datasets I want to allow users to choose from
+            Seaborn_dataset = st.selectbox("Choose a Seaborn dataset:", dataset_names) # Streamlit widget
+            if Seaborn_dataset:# if they choose to look at Seaborn dataset, load it to df
+                df = sns.load_dataset(Seaborn_dataset) # defining df by Seaborn dataset
+        else:
+            user_file = st.file_uploader('Upload a csv file', type = 'csv') # use streamlit widget for uploading files - set to only accepting csv
+            if user_file: # if the user uploads a file then that will be set as the df variable
+                df = pd.read_csv(user_file) # define df by user csv.file if they choose to upload one
 
-    # Display dataset
-    st.dataframe(df)
+        # Display dataset
+        if df is not None: # if the df is defined by Seaborn data or user data
+            st.dataframe(df) # display chosen dataset
+            # Remove rows with missing values
+            df.dropna(inplace=True)
+        return df
 
-    # Remove rows with missing values
-    df.dropna(inplace=True)
+    def features_and_target_data(df, features, target_var): #define features and target variable
+        # Define features and target
+        if features == None: # require user to input at least on feature
+            st.error("Please choose at least one feature.") # give error message if no features are selected
+            
+        if target_var in features: # if the user accidentally makes one of their features the target variable too
+            st.error("Target variable cannot be a selected feature variable.") # give error message
+            
 
-    # Define features and target
-    st.markdown("""
-                ### Important Instructions:
-                ###### Depending on the Machine Learning Model you choose to explore, your feature and target variables will change.
-                - For Linear Regression models, make sure to select feature and target variables which are continuous and numeric.
-                - For Logistic Regression models make sure to select categorical or continuous variables for the features and a binary variable for the target. Binary means the target variable's outcome must be 0 or 1, yes or no.
-                 """)
-    
-    # Choosing features
-    features = st.multiselect("Choose features here", options = df.columns) # grab the columns so they have drop down of column names
+    def split_data(X, y, test_size=0.2, random_state=42): # random state allows for replicated results - improves user experience
+        return train_test_split(X, y, test_size=test_size, random_state=random_state)
 
-    # Choosing target variable
-    target_var = st.selectbox("Choose your target variable here (target variable cannot be one of selected feature variables)", options = df.columns)
-    X = df[features]
-    y = df[target_var]
-    return df, X, y, features
+    def train_knn(X_train, y_train, n_neighbors): # train k nearest neighbors with training data
+        if X_train is None:
+            return st.write("Please upload a dataset.")
+        else:
+            knn = KNeighborsClassifier(n_neighbors=n_neighbors) # import KNeighborsClassifier
+            knn.fit(X_train, y_train) # fit knn to the data
+            return knn
 
-
-def split_data(X, y, test_size=0.2, random_state=42): # random state allows for replicated results - improves user experience
-    return train_test_split(X, y, test_size=test_size, random_state=random_state)
-
-# Initialize and train the linear regression model on unscaled data
-def initialize_and_train_linear_regression():
-    # Initialize class (getting it ready)
-    lin_reg = LinearRegression()
-    # Train our data ('fit' method changes this class automatically)
-    lin_reg.fit(X_train, y_train)
-    # Make predictions on the test set
-    y_pred = lin_reg.predict(X_test) #this is putting the 20% of our X_test into model & getting what the model predicts the y-value is
-    return lin_reg, y_pred
-
-# Initialize and train a logistic regression model on unscaled data
-def initialize_and_train_logistic_regression():
-    # Initialize class (getting it ready)
-    log_reg = LogisticRegression()
-    # Train our data ('fit' method changes this class automatically)
-    log_reg.fit(X_train, y_train)
-    # Make predictions on the test set
-    y_pred = log_reg.predict(X_test) #this is again putting the 20% of our X_test into model & getting what the model predicts the y-value is
-    return log_reg, y_pred
-
-# Create a visualization of Linear Regression Model
-def lin_reg_fig(X_test, y_test):
-    plt.scatter(X_test, y_test, color='blue')
-    plt.plot(X_test, lin_reg, color='red')
-    plt.title('Linear Regression Model')
-    plt.legend
-    st.pyplot(plt)
-    plt.clf()
-
-# Evaluate Linear Regression Model's Metrics
-def lin_reg_metrics(y_test, y_pred):
-    rmse_lin = root_mean_squared_error(y_test, y_pred)
-    r2_lin = r2_score(y_test, y_pred)
-    st.write("Linear Regression Model Metrics:")
-    st.write(f"Root Squred Error: {rmse_lin:.2f}")
-    st.write(f"R^2 Score: {r2_lin:.2f}")
-
-# Confusion Matrix
-def plot_confusion_matrix(cm, title):
-    plt.figure(figsize=(6,4))
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
-    plt.title(title)
-    plt.xlabel('Predicted')
-    plt.ylabel('Actual')
-    st.pyplot(plt)
-    plt.clf()
+    # Confusion Matrix
+    def plot_confusion_matrix(cm, title): # plot the confusion matrix
+        plt.figure(figsize=(6,4)) # size of image
+        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues') #heatmap with shades of blue
+        plt.title(title) #title of entire heatmap
+        plt.xlabel('Predicted') #title of x axis
+        plt.ylabel('Actual') #title of y axis
+        st.pyplot(plt)
+        plt.clf()
 
 ### Streamlit App Layout ###
 
-# Selection controls at the top - Create two columns for side-by-side display
-col1, col2 = st.columns(2)
+    # Selection controls at the top
+    st.markdown("### Select Parameters")
+    k = st.slider("Select the number of neighbors (k, odd numbers only)", min_value=1, max_value=11, step=2, value=5) # add toggle feature for user to select number of neighbors(k)
+    data_type = st.radio("Data Type", options=["Unscaled", "Scaled"]) # add radio selection for user to switch between unscaled and scaled data
 
-with col1:
-    st.subheader("Regression Model")
-    selected_model = st.radio("Choose a type of Regression Model:", options = ["Linear Regression", "Logistic Regression"])
+    # Load and preprocess the data; split into training and testing sets
+    df = load_and_preprocess_data()
+    if df is not None: # if df has been defined
+        st.markdown("### Select Feature and Target Variables")
+        
+        # Choosing features
+        features = st.multiselect("Choose features", options = df.columns) # grab the columns so they have drop down of column names
 
-with col2:
-    st.subheader("Data Type")
-    data_type = st.radio("Choose a type of data:", options=["Unscaled", "Scaled"])
+        # Choosing target variable
+        target_var = st.selectbox("Choose the target variable", options = df.columns) # selectbox since you can only have one target variable
 
-# Load and preprocess the data; split into training and testing sets
-df, X, y, features = load_and_preprocess_data()
-X_train, X_test, y_train, y_test = split_data(X, y)
+        features_and_target_data(df, features, target_var)
+        X = df[features]
+        y = df[target_var]
 
-# Depending on the toggle, optionally scale the data
-if data_type == "Scaled":
-    scaler = StandardScaler()
-    X_train = scaler.fit_transform(X_train)
-    X_test = scaler.transform(X_test)
+        X_train, X_test, y_train, y_test = split_data(X, y) # test, train, and split data
 
-# Training data and displaying results
-if selected_model == 'Linear Regression':
-    if not all(pd.api.types.is_numeric_dtype(X[col]) for col in features):
-        st.warning("Linear Regression requires all numeric feature variables. Please change your selection.")
-    elif not pd.api.types.is_numeric_dtype(y):
-        st.warning("Linear Regression requires a numeric target variable. Please change your selection.")
+        # Depending on toggle, data can be scaled or unscaled
+        if data_type == "Scaled":
+            scaler = StandardScaler()
+            X_train = scaler.fit_transform(X_train)
+            X_test = scaler.transform(X_test)
     else:
-        lin_reg, y_pred = initialize_and_train_linear_regression()
-        lin_reg_fig(lin_reg)
-        lin_reg_metrics(y_test, y_pred)
+        st.write("Please upload a dataset.")
 
-elif selected_model == "Logistic Regression":
-    if y.nunique() > 3:
-        st.warning("Logistic Regression requires a target variable with 3 or less components. Please change your selection.")
-    elif not pd.api.types.is_numeric_dtype(y):
-        st.warning("Logistic Regression requires a categorical target variable. Please change your selection.")
-    else:
-        log_reg, y_pred = initialize_and_train_logistic_regression()
-        cm = confusion_matrix(y_test, y_pred)
-        plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
+with tab3:
+        if X_train is None:
+            st.write("Please upload a dataset.")
+        else:
+            # Train KNN with the selected k value
+            knn_model = train_knn(X_train, y_train, n_neighbors=k)
+            if data_type == "Scaled":
+                st.write(f"**Scaled Data: KNN (k = {k})**")
+            else:
+                st.write(f"**Unscaled Data: KNN (k = {k})**")
 
+            # Predict and evaluate
+
+            y_pred = knn_model.predict(X_test)
+            accuracy_val = accuracy_score(y_test, y_pred) # train accuracy score
+            st.write(f"**Accuracy: {accuracy_val:.2f}**")
+
+            # Confusion Matrix
+            st.subheader("Confusion Matrix")
+            cm = confusion_matrix(y_test, y_pred)
+            plot_confusion_matrix(cm, "Confusion Matrix for Logistic Regression")
+            st.markdown("""
+                        ### Confusion Matricies show the Actual values compared to the Predicted values.
+                        - The upper left quadrant has the True Negatives, which means the number of datapoints the model predicts to be negative (0) and in actuality are negative (0). We want this quadrant to be high because that means it is good at correctly classifying negatives.
+                        - The upper right quadrant is the False Positives, which means the model predicts a positive (1) outcome but in actuality the data point was negative (0). We do not want this quadrant to have a high number.
+                        - The lower left quadrant is False Negatives, which are the points which the model predicts to be negative (0) but are actually positive (1). We want to limit this number as well.
+                        - Finally, the lower right quadrant is the True Positives where the model predicts a positive (1) outcome and it is actually positive (1). We want to maximize True Positives and True Negatives because that means the model is good at classifying.
+                        """) # explain matix so any user can understand
+
+            # Classification Report
+            st.subheader("Classification Report")
+            st.text(classification_report(y_test, y_pred))
+            st.markdown("""
+                        - Precision here is the ratio of correctly predicted classes (True Positives) over the total predicted classes (True Positives + False Positives).
+                        - Recall depicts the ratio of correctly predicted classes (True Positives) to all the data in the actual dataset class (True Positives + False Negatives).
+                        - F1 Scores take into account precision and recall.
+                        - The overall accuracy score gives a solid idea of how good the model is at classifying data.
+                        """) # explain the different metrics
 
 ### Additional Data Information Section ###
 
-with st.expander("Click to view Data Information"):
+with tab4:
+    st.expander("Click to view Data Information")
     st.write("#### First 5 Rows of the Dataset")
     st.dataframe(df.head())
     st.write("#### Statistical Summary")
     st.dataframe(df.describe())
 
-### User Review ###
-st.feedback('stars')
+    ### User Review ###
+    st.write("Rate this app!")
+    st.feedback('stars')
