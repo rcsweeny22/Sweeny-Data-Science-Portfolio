@@ -35,7 +35,7 @@ with tab2:
     def load_and_preprocess_data(): #defining: loading and preprocessing data
         st.markdown("""
                     ### Important Instructions:
-                    ###### For KNN, make sure to select continuous numeric variables for the features and a categorical variable for the target.
+                    ###### For KNN, make sure to select continuous numeric variables for the features.
                     """)
         file = st.radio("Choose a pre-loaded dataset from Seaborn or upload your own csv.file", options = ['Seaborn dataset', 'Upload csv.file'], key = "data_radio") # creates upload file option on Streamlit
         df = None
@@ -99,8 +99,8 @@ with tab2:
             plt.grid(True)
             st.pyplot(plt)
 
-    def features_and_target_data(df, features, target_var): #define features and target variable
-        # Define features and target
+    def features_data(df, features): #define features
+        # Define features
         if features == None: # require user to input at least on feature
             st.error("Please choose at least one feature.") # give error message if no features are selected
 
@@ -109,15 +109,12 @@ with tab2:
     # Load and preprocess the data; split into training and testing sets
     df = load_and_preprocess_data()
     if df is not None: # if df has been defined
-        st.markdown("### Select Feature and Target Variables")
+        st.markdown("### Select Feature Variables")
         # Choosing features
         features = st.multiselect("Choose the feature variables", options = df.columns) # grab the columns so they have drop down of column names
-        # Choosing target variable
-        target_var = st.selectbox("Choose the target variable", options = df.columns) # selectbox since you can only have one target variable
-        features_and_target_data(df, features, target_var)
-    if features and target_var:
+        features_data(df, features)
+    if features:
         X = df[features]
-        y = df[target_var]
         scaler = StandardScaler()
         X_std = scaler.fit_transform(X)
        
