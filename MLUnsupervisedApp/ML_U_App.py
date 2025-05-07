@@ -71,7 +71,34 @@ with tab2:
         if df is not None: # if the df is defined by Seaborn data or user data
             st.dataframe(df) # display chosen dataset
         return df
-        
+
+    def k_means(X_std):
+        # Set the number of clusters
+        k = st.number_input('Select number of k clusters:', min_value=2, max_value=8)
+        kmeans = KMeans(n_clusters = k, random_state=42)
+        clusters = kmeans.fit_predict(X_std)
+        # Output the centroids and first few cluster assignments
+        st.write(f"First 15 cluster assignments: {clusters[:15]}")
+        return clusters
+   
+    def pca_viz(X_std, clusters):
+        # Reduce the data to 2 dimensions for visualization using PCA
+            pca = PCA(n_components=2)
+            X_pca = pca.fit_transform(X_std)
+
+
+            # Create a scatter plot of the PCA-transformed data, colored by KMeans cluster labels
+            plt.figure(figsize=(8, 6))
+            for cluster in np.unique(clusters):
+                plt.scatter(X_pca[clusters == cluster, 0], X_pca[clusters == cluster, 1],
+                            alpha=0.7, edgecolor='k', s=60, label=f'Cluster{cluster}')
+            plt.xlabel('Principal Component 1')
+            plt.ylabel('Principal Component 2')
+            plt.title('KMeans Clustering: 2D PCA Projection')
+            plt.legend(loc='best')
+            plt.grid(True)
+            st.pyplot(plt)
+
     def features_and_target_data(df, features, target_var): #define features and target variable
         # Define features and target
         if features == None: # require user to input at least on feature
@@ -80,55 +107,20 @@ with tab2:
         if target_var in features: # if the user accidentally makes one of their features the target variable too
             st.error("Target variable cannot be a selected feature variable.") # give error message
 
-
-    def k_means():
-        # Set the number of clusters
-        k = st.number_input('Select number of k clusters:', min_value=2, max_value=8)
-        kmeans = KMeans(n_clusters = k, random_state=42)
-        clusters = kmeans.fit_predict(X_std)
-        # Output the centroids and first few cluster assignments
-        st.write(clusters[:15])
-   
-    def pca_viz(pca, X_pca):
-        # Reduce the data to 2 dimensions for visualization using PCA
-            pca = PCA(n_components=2)
-            X_pca = pca.fit_transform(X_std)
-
-
-            # Create a scatter plot of the PCA-transformed data, colored by KMeans cluster labels
-            plt.figure(figsize=(8, 6))
-            plt.scatter(X_pca[clusters == 0, 0], X_pca[clusters == 0, 1],
-                        c='navy', alpha=0.7, edgecolor='k', s=60, label='Cluster 0')
-            plt.scatter(X_pca[clusters == 1, 0], X_pca[clusters == 1, 1],
-                        c='darkorange', alpha=0.7, edgecolor='k', s=60, label='Cluster 1')
-            plt.xlabel('Principal Component 1')
-            plt.ylabel('Principal Component 2')
-            plt.title('KMeans Clustering: 2D PCA Projection')
-            plt.legend(loc='best')
-            plt.grid(True)
-            plt.show()
-
-
 ### Streamlit App Layout ###
 
     # Load and preprocess the data; split into training and testing sets
     df = load_and_preprocess_data()
     if df is not None: # if df has been defined
         st.markdown("### Select Feature and Target Variables")
-       
         # Choosing features
         features = st.multiselect("Choose the feature variables", options = df.columns) # grab the columns so they have drop down of column names
-
-
         # Choosing target variable
         target_var = st.selectbox("Choose the target variable", options = df.columns) # selectbox since you can only have one target variable
-
-
         features_and_target_data(df, features, target_var)
+    if features and target_var:
         X = df[features]
         y = df[target_var]
-
-
         scaler = StandardScaler()
         X_std = scaler.fit_transform(X)
        
@@ -140,13 +132,11 @@ with tab3:
         if X_std is None:
             st.write("Please upload a dataset.")
         else:
-            k = st.number_imput('Select number of k clusters:', min_value=2, max_value=8)
+            k = st.number_input('Select number of k clusters:', min_value=2, max_value=8)
             kmeans = KMeans(n_clusters = k, random_state=42)
             clusters = kmeans.fit_predict(X_std)
-            accuracy_score(y, clusters)
-            st.write(f"**Accuracy: {accuracy_score:.2f}**")
-            st.write(f"** Classification Report: {classification_report(y, clusters)}**")
-            print(pca_viz)
+            if st.button("Visualize Clusters with Principal Component Analysis"):
+                pca_viz(X_std, clusters)
 
 
 ### Additional Data Information Section ###
