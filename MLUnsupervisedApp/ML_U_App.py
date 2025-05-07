@@ -63,6 +63,9 @@ with tab2:
                 df = pd.read_csv(user_file) # define df by user csv.file if they choose to upload one
                 df.dropna(inplace=True)
 
+        non_numeric_cols = [col for col in df.columns if not pd.api.types.is_numeric_dtype(df[col])]
+        if non_numeric_cols:
+            df = pd.get_dummies(df, columns=non_numeric_cols, drop_first=True)
 
         # Display dataset
         if df is not None: # if the df is defined by Seaborn data or user data
