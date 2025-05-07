@@ -80,7 +80,7 @@ with tab2:
 
     def k_means():
         # Set the number of clusters
-        k = st.number_imput('Select number of k clusters:', min_value=2, max_value=8)
+        k = st.number_input('Select number of k clusters:', min_value=2, max_value=8)
         kmeans = KMeans(n_clusters = k, random_state=42)
         clusters = kmeans.fit_predict(X_std)
         # Output the centroids and first few cluster assignments
