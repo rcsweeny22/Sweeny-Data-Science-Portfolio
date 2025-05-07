@@ -24,7 +24,7 @@ with tab1:
         
     In this app, you can:
     - Use one of Seaborn's pre-loaded datasets like Titanic, Penguins, or Taxis, or upload your own csv.file.
-    - Input different features and target variables to explore the elements of K-Means Clustering.
+    - Input different features variables to explore the elements of K-Means Clustering.
     - Toggle between different parameters to change the number of clusters (k).
     """)
     st.error("Warning: You might get an error message until you go to the second tab and input a continuous variable for features.")
@@ -103,9 +103,6 @@ with tab2:
         # Define features and target
         if features == None: # require user to input at least on feature
             st.error("Please choose at least one feature.") # give error message if no features are selected
-           
-        if target_var in features: # if the user accidentally makes one of their features the target variable too
-            st.error("Target variable cannot be a selected feature variable.") # give error message
 
 ### Streamlit App Layout ###
 
