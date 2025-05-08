@@ -1,3 +1,4 @@
+# Import necessary libraries
 import streamlit as st
 import numpy as np
 import pandas as pd
@@ -86,26 +87,26 @@ with tab2:
 
     def k_means(X_std):
         # Set the number of clusters
-        k = st.number_input('Select number of k clusters:', min_value=2, max_value=8)
-        kmeans = KMeans(n_clusters = k, random_state=42)
-        clusters = kmeans.fit_predict(X_std)
+        k = st.number_input('Select number of k clusters:', min_value=2, max_value=8) #allow users to input different numbers of k clusters
+        kmeans = KMeans(n_clusters = k, random_state=42) #call KMeans function
+        clusters = kmeans.fit_predict(X_std) #fit the clusters to KMeans algorithm
         # Output the centroids and first few cluster assignments
         st.write(f"First 15 cluster assignments: {clusters[:15]}")
         return clusters
    
     def pca_viz(X_std, clusters):
         # Reduce the data to 2 dimensions for visualization using PCA
-            pca = PCA(n_components=2)
+            pca = PCA(n_components=2) # use PCA to reduce dimetionality of large datasets into just 2 dimensions
             X_pca = pca.fit_transform(X_std)
 
 
             # Create a scatter plot of the PCA-transformed data, colored by KMeans cluster labels
-            plt.figure(figsize=(8, 6))
+            plt.figure(figsize=(8, 6)) # size of scatter plot
             for cluster in np.unique(clusters):
                 plt.scatter(X_pca[clusters == cluster, 0], X_pca[clusters == cluster, 1],
                             alpha=0.7, edgecolor='k', s=60, label=f'Cluster{cluster}')
-            plt.xlabel('Principal Component 1')
-            plt.ylabel('Principal Component 2')
+            plt.xlabel('Principal Component 1') #label of x-axis
+            plt.ylabel('Principal Component 2') #label of y-axis
             plt.title('KMeans Clustering: 2D PCA Projection')
             plt.legend(loc='best')
             plt.grid(True)
@@ -127,8 +128,8 @@ with tab2:
         features_data(df, features)
     if features:
         X = df[features]
-        scaler = StandardScaler()
-        X_std = scaler.fit_transform(X)
+        scaler = StandardScaler() #scale data
+        X_std = scaler.fit_transform(X) #data must be scaled for K-Means to work
        
     else:
         st.write("Please upload a dataset.")
@@ -142,13 +143,13 @@ with tab3:
         if X_std is None:
             st.write("Please upload a dataset.")
         else:
-            k = st.number_input('Select number of k clusters:', min_value=2, max_value=8)
+            k = st.number_input('Select number of k clusters:', min_value=2, max_value=8) #allow user to input a number for k clusters
             kmeans = KMeans(n_clusters = k, random_state=42)
             clusters = kmeans.fit_predict(X_std)
             if st.button("Visualize Clusters with Principal Component Analysis"):
                 pca_viz(X_std, clusters)
         
-        st.divider()
+        st.divider() #create sections between viasualization and text
         
         st.markdown("""
         ###### Understanding the visualization:
@@ -161,12 +162,12 @@ with tab3:
 
 
 with tab4:
-    st.expander("Click to view Data Information")
+    st.expander("Click to view Data Information") #allow user to see basic sttistics of dataset
     st.write("#### First 5 Rows of the Dataset")
     st.dataframe(df.head())
     st.write("#### Statistical Summary")
     st.dataframe(df.describe())
 
     ### User Review ###
-    st.write("Rate this app!")
+    st.write("Rate this app!") #allow user opportunity to express whether or not they liked the app
     st.feedback('stars')
