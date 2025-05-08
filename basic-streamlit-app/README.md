@@ -15,6 +15,12 @@
 
 ### App Features: 🍎
 - This app features different toggles so users can choose different species, islands, bill length, flipper length, and body masses of penguins to interract with on Streamlit. Different widgets such as the select box and slider are encoded for an interractive user experience.
+- Here is an example of the code I learned and then used to create this app:
+```
+bill_length = st.slider("Choose a bill length:", 
+                   min_value = df["bill_length_mm"].min(),
+                   max_value = df["bill_length_mm"].max())
+```
 
 
 ### Dataset Description: 🔍
