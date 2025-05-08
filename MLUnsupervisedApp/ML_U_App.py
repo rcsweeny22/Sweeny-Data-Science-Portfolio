@@ -147,6 +147,7 @@ with tab3:
                         ### Important Instructions:
                         ###### For K-Means Clustering, you have to make sure to scale your data. This has been done for you already, but is important to keep in mind for furture projects.
                         """)
+        st.divider()
         st.markdown("""
         ###### Understanding the visualization:
         - Although K-Means works well on large datasets it is dependent on the choice of distance metric and the structure of the dataset.
