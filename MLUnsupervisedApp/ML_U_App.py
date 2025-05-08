@@ -11,39 +11,51 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 
 
-tab1, tab2, tab3, tab4 = st.tabs(["General App Information",
-                                  "User Input",
-                                  "Model Accuracy",
+tab1, tab2, tab3, tab4 = st.tabs(["General App Information", #overview of K-Means
+                                  "User Input", # input features
+                                  "Model Visualization", #PCA and k clusters
                                   "Additional Data Information"]) # Organize app into different tabs
 
 with tab1:
     st.title("Machine Learning Application: K-Means Performance")
     st.markdown("""
     ### About This Application
-    Summary
+    Overview:
+    - K-Means is a form of clustering that groups points of data together in k number of clusters.
+    - It finds the optimal centroid for the k number of clusters and consequently might reveal some helpful information.
+    - K-Means Clustering is used to find unclear patterns in unlabeled data, to categorize subgroups within large unlabeled datasets, and as a beginning step to further data science analyses.
+    - K-Means is pretty intuitive and easy to implement for large datasets.
+                
+    Understanding K-Means Clustering:
+    - 1. The k number of clusters is randomly chosen.
+    - 2. The number of k centroids are randomly given a set of coordinates that each centroid uses to assign each data point based on its distance. Usually Euclidean distance is used. Each data point is therefore assigned a subgroup or a cluster based on the centroid closest to it.
+    - 3. The centroids are recalculated based on the mean of each cluster.
+    - 4. This process is reiterated until convergence or until a certain number of iterations is complete. Convergence is when the data points in a cluster do not change significantly anymore.
+    - 5. This produces k clusters with centroids that “minimize the sum of squared distances” (IDS Week 13_1 slides).
+
         
     In this app, you can:
     - Use one of Seaborn's pre-loaded datasets like Titanic, Penguins, or Taxis, or upload your own csv.file.
     - Input different features variables to explore the elements of K-Means Clustering.
-    - Toggle between different parameters to change the number of clusters (k).
+    - Increase or decrease the number of clusters (k) to see the different PCA 2D results.
     """)
-    st.error("Warning: You might get an error message until you go to the second tab and input a continuous variable for features.")
+    st.error("Warning: You might get an error message until you go to the 'User Input' tab and select at least one feature variable.")
 
 ### Download or Upload DataSet ###
 
 with tab2:
-    def preprocess_dataset(df, dropna_columns=None):
+    def preprocess_dataset(df, dropna_columns=None): # preprocessing all data to handle missing rows and to convert categorical variables to numeric
         if dropna_columns:
-            df.dropna(subset=dropna_columns, inplace=True)
-        non_numeric_cols = [col for col in df.columns if not pd.api.types.is_numeric_dtype(df[col])]
+            df.dropna(subset=dropna_columns, inplace=True) 
+        non_numeric_cols = [col for col in df.columns if not pd.api.types.is_numeric_dtype(df[col])] # making every variable is numeric
         if non_numeric_cols:
-            df = pd.get_dummies(df, columns=non_numeric_cols, drop_first=True)
+            df = pd.get_dummies(df, columns=non_numeric_cols, drop_first=True) # this will encode the non-numeric columns
         return df
     
     def load_and_preprocess_data(): #defining: loading and preprocessing data
         st.markdown("""
                     ### Important Instructions:
-                    ###### For KNN, make sure to select continuous numeric variables for the features.
+                    ###### For K-Means Clustering, you have to make sure to scale your data. This has been done for you already, but is important to keep in mind for furture projects.
                     """)
         file = st.radio("Choose a pre-loaded dataset from Seaborn or upload your own csv.file", options = ['Seaborn dataset', 'Upload csv.file'], key = "data_radio") # creates upload file option on Streamlit
         df = None
@@ -131,8 +143,17 @@ with tab3:
             clusters = kmeans.fit_predict(X_std)
             if st.button("Visualize Clusters with Principal Component Analysis"):
                 pca_viz(X_std, clusters)
-
-
+        st.markdown("""
+                        ### Important Instructions:
+                        ###### For K-Means Clustering, you have to make sure to scale your data. This has been done for you already, but is important to keep in mind for furture projects.
+                        """)
+        st.markdown("""
+        ###### Understanding the visualization:
+        - Although K-Means works well on large datasets it is dependent on the choice of distance metric and the structure of the dataset.
+        - This app required a lot of preprocessing steps in order to ensure the dataset structures of different Seaborn and uploaded datasets would be able to work, but K-Means clustering is, in general, dependent on the choice of distance metric and the structure of the dataset.
+        - Also, it is helpful to remember that K-Means works best with spherical clusters and can often be influenced by outliers in data.
+            """)
+        
 ### Additional Data Information Section ###
 
 
@@ -142,7 +163,6 @@ with tab4:
     st.dataframe(df.head())
     st.write("#### Statistical Summary")
     st.dataframe(df.describe())
-
 
     ### User Review ###
     st.write("Rate this app!")
