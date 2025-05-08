@@ -17,8 +17,8 @@
 
 
 ### App Features: 🍎
-- The classification model this app explores is k Nearest Neighbors. KNN is primarily used when the target variable is categorical and binary or multi-class. KNN assumes that data points near one another and with similar features have similar outcomes. KNN is the process by which a machine learns to classify a new datapoint based off the majority class of its number of neighbors (k). When using KNN in the real world, proper scaling is essential but for the sake of this project, users can switch between scaled and unscaled data to see the difference in the model's accuracy score.
-- For hyperparameters, this app features a Confusion Matrix and accuracy scores as well as precision and F1 scores. The Confusion Matrix helps show the model's ability to classify true positives, true negatives, false positives, and false negatives. This is helpful because based on what features the user selects, one of these quadrants of the Confusion Matrix could be more heavily weighed. The accuracy score was also highlighted because it gives solid insight into the overall effectiveness the model shows in classifying data.
+- This app explores K-Means, a form of clustering that groups points of data together in k number of clusters. K-Means is a helpful method of unsupervised machine learning because it finds the optimal centroid for the k number of clusters and consequently can reveal helpful information such as hidden patterns or new subgroups within large unlabeled datasets.
+- Since datasets often have high dimensionality, I use Principal Component Analysis (PCA) in order to reduce the datasets to 2 dimensions. This then allows users to have a visualization in the form of a scatter plot that depicts the K-Means clustered data.
 
 
 ### Dataset Descriptions: 🔍
