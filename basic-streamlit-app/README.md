@@ -1,6 +1,6 @@
 # Penguins Streamlit App 🐧
 >[!IMPORTANT]
->**Skills showcased**: K-Means Clustering, Streamlit, Unsupervised Machine Learning
+>**Skills showcased**: EDA, Pandas, Streamlit, Python
 
 ### 🔀 Project Overview:
 - This project is a beginner app where users are invited to interract with the Penguins dataset through different filtering parameters. Though it is not shareable through a public link and therefore less user friendly, the instructions will help guide users on how to interract with the dataset.  
@@ -13,7 +13,7 @@
 - Step 4. Navigate to the Streamlit App via the link that pops up.
 - Step 5. Explore the app by changing the filters and widgets.
 
-### 🍎App Features:
+### 🍎 App Features:
 - This app features different toggles so users can choose different species, islands, bill length, flipper length, and body masses of penguins to interract with on Streamlit. Different widgets such as the select box and slider are encoded for an interractive user experience.
 - Here is an example of the code I learned and then used to create this app:
 ```
@@ -31,6 +31,6 @@ bill_length = st.slider("Choose a bill length:",
 - Results will vary based on user selections.
 
 
-### ✏️References:
+### ✏️ References:
 - [Penguins Datasets](https://www.geeksforgeeks.org/seaborn-datasets-for-data-science/#3-penguins-dataset)
 - Course slides, notes, homework, and code.
