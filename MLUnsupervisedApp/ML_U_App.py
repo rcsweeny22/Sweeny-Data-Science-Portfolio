@@ -135,6 +135,10 @@ with tab2:
 
 
 with tab3:
+        st.markdown("""
+                        ### Important Instructions:
+                        ###### For K-Means Clustering, you have to make sure to scale your data. This has been done for you already, but is important to keep in mind for furture projects.
+                        """)
         if X_std is None:
             st.write("Please upload a dataset.")
         else:
@@ -143,11 +147,9 @@ with tab3:
             clusters = kmeans.fit_predict(X_std)
             if st.button("Visualize Clusters with Principal Component Analysis"):
                 pca_viz(X_std, clusters)
-        st.markdown("""
-                        ### Important Instructions:
-                        ###### For K-Means Clustering, you have to make sure to scale your data. This has been done for you already, but is important to keep in mind for furture projects.
-                        """)
+        
         st.divider()
+        
         st.markdown("""
         ###### Understanding the visualization:
         - Although K-Means works well on large datasets it is dependent on the choice of distance metric and the structure of the dataset.
