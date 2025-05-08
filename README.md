@@ -1,5 +1,7 @@
 # Sweeny-Data-Science-Portfolio :briefcase:
  - This is my Data Science Portfolio where I will store the visualizations, models, and projects I complete in my _Introduction to Data Science_ course this spring semester at Notre Dame. This portfolio provides a window into my technical data sceince skills and showcases my creativity. As a student new to coding, this portfolio will be one of my first big steps into the world of Data Science.
+>[!IMPORTANT]
+>The **technical skills** I have showcased in these four projects include: **EDA, Pandas, Streamlit, Python, TidyData principles, Seaborn, Supervised Machine Learning, KNN, SKLearn, Unsupervised Machine Learning, and K-Means Clustering.**
 
 ## At a Glance:
  - Project 1: [Penguin Streamlit App](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/basic-streamlit-app)
@@ -13,16 +15,20 @@
 
 ## Project 1- Creating my first Streamlit App! :penguin:
 ### Come try my new [penguin streamlit app](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/basic-streamlit-app)!
+>[!IMPORTANT]
+>**Skills showcased**: EDA, Pandas, Streamlit, Python
 
 ### 	🖥️: Overview:
 - For this project I wanted to create an interractive app where users could engage with my code in a fun way! This is a great app for children and those interested in wildlife because it compares different species, sizes, and island of penguins.
-- I coded select boxes so users could filter penguins by island and also sliders so users could enagage with the bill and flipper length of the different penguin species. 
+- I coded select boxes so users could filter penguins by island and also sliders so users could enagage with the bill and flipper length of the different penguin species.
 
 ### 	:bulb: Relationship:
 - In order to understand the importance of Unsupervised and Supervised Machine Learning practices, this project gave me the opportunity to create an Exploratory Data Analysis. While analyzing data is fun, there are a lot of steps beforehand that are necessary if one wants to manipulate and investigate data through an EDA. This project allowed me to have a better appreciation for the preprocessing steps while also exposing me to the basics of creating an app. I was able to use this Streamlit app knowledge more in my third and fourth projects.
   
 ## Project 2- Tidy Data Project: Jump Back to the 2008 Olympics! 🏊
 ### Check out my [Tidy Data Project](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/TidyData-Project)!
+>[!IMPORTANT]
+>**Skills showcased**: TidyData principles, Seaborn, Python
 
 ### :desktop_computer: Overview:
 -  In this project you will be able to enagage with messy data about the 2008 Olympic Games and learn how to organize and clean the data in order to make it read-able for a computer. Sometimes, code that makes sense to us confuses programs which need data in a precise and organized fashion. All variables must be in their own column and all observations in their own row.
@@ -38,6 +44,8 @@
 
 ## Project 3 - Machine Learning: [My k Nearest-Neighbors App](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/MLStreamlitApp) :calling:
 ### Send this [link](https://sweeny-data-science-portfolio-cu5pwrtpvbf7habq472ote.streamlit.app/) to family and friends and spread the Classification Model love!
+>[!IMPORTANT]
+>**Skills showcased**: KNN, Pandas, Streamlit, Supervised Machine Learning
 
 ### 🖥️ Overview:
 - In this project I created a Streamlit app that is accessible to anyone who uses this [link](https://sweeny-data-science-portfolio-cu5pwrtpvbf7habq472ote.streamlit.app/). By using either a pre-loaded Seaborn dataset such as Titanic, Penguins, or Taxis, or uploading your own csv.file, users are able to explore the different dimensions of K Nearest Neighbors (KNN).
@@ -52,6 +60,8 @@
 
 ## Project 4 - Unsupervised Machine Learning: [My K-Means Clustering App](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/MLUnsupervisedApp) 💠
 ### Use this [link](https://sweeny-data-science-portfolio-9fedggdxehs36qbisvcsag.streamlit.app/) and send it to your friends or any Data Science lover!
+>[!IMPORTANT]
+>**Skills showcased**: K-Means Clustering, Streamlit, Unsupervised Machine Learning
 
 ### 🖥️ Overview:
 - This project features an interractive Unsupervised Machine Learning application that allows users to explore the functions of K-Means Clustering. You can check out the project at this [link](https://sweeny-data-science-portfolio-9fedggdxehs36qbisvcsag.streamlit.app/)! Users are encouraged to select a preloaded Seaborn dataset or to upload their own.
