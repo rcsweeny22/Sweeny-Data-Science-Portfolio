@@ -137,8 +137,7 @@ with tab2:
 
 with tab3:
         st.markdown("""
-                        ### Important Instructions:
-                        ###### For K-Means Clustering, you have to make sure to scale your data. This has been done for you already, but is important to keep in mind for furture projects.
+                    ###### Explore K-Means Clustering:
                         """)
         if X_std is None:
             st.write("Please upload a dataset.")
