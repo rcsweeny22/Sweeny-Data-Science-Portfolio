@@ -1,10 +1,30 @@
-# This is my Data Science streamlit app!
-- This app will be interactive and an opportunity for individuals to engage with my code in an exciting way.
-- I will offer some filtering options that allow my audience to interact with the sample DataFrame I chose to work with, which is Palmer's Penguins.
-
+# Penguins Streamlit App
 >[!IMPORTANT]
->**Skills showcased**: EDA, Pandas, Streamlit, Python
+>**Skills showcased**: K-Means Clustering, Streamlit, Unsupervised Machine Learning
 
-# Instructions:
-- In order to run the streamlit app, you must go to your Terminal in VS Code and type in: streamlit run basic_streamlit_app/main.py
-- The CSV used in the app is already located in the data folder within the basic-streamlit-app folder.
+### Project Overview: 🔀
+- This project is a beginner app where users are invited to interract with the Penguins dataset through different filtering parameters. Though it is not shareable through a public link and therefore less user friendly, the instructions will help guide users on how to interract with the dataset.  
+
+
+### Instructions: 📄
+- Step 1. Go into terminal in VS Code.
+- Step 2. Type in: streamlit run basic_streamlit_app/main.py
+- Step 3. Use the [CSV file](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/basic-streamlit-app/data) in the basic-streamlit-app folder. 
+- Step 4. Navigate to the Streamlit App via the link that pops up.
+- Step 5. Explore the app by changing the filters and widgets.
+
+### App Features: 🍎
+- This app features different toggles so users can choose different species, islands, bill length, flipper length, and body masses of penguins to interract with on Streamlit. Different widgets such as the select box and slider are encoded for an interractive user experience.
+
+
+### Dataset Description: 🔍
+- 🐧Seaborn's Penguins dataset has numerous features such as species, island, bill length, bill depth, flipper length, body mass, and sex. You can explore these different variables and filter them in different ways in the app!
+
+
+### Results: 📉
+- Results will vary based on user selections.
+
+
+### References: ✏️
+- [Penguins Datasets](https://www.geeksforgeeks.org/seaborn-datasets-for-data-science/#3-penguins-dataset)
+- Course slides, notes, homework, and code.
