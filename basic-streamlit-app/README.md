@@ -1,4 +1,4 @@
-# Penguins Streamlit App
+# Penguins Streamlit App 🐧
 >[!IMPORTANT]
 >**Skills showcased**: K-Means Clustering, Streamlit, Unsupervised Machine Learning
 
