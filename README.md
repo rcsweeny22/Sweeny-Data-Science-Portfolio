@@ -1,6 +1,16 @@
 # Sweeny-Data-Science-Portfolio :briefcase:
  - This is my Data Science Portfolio where I will store the visualizations, models, and projects I complete in my _Introduction to Data Science_ course this spring semester at Notre Dame. This portfolio provides a window into my technical data sceince skills and showcases my creativity. As a student new to coding, this portfolio will be one of my first big steps into the world of Data Science.
 
+## At a Glance:
+ - Project 1: [Penguin Streamlit App](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/basic-streamlit-app)
+   * This basic streamlit app allows users to interract with Seaborn's penguin dataset through an exploratory data analysis.       
+ - Project 2: [Tidy Data Project](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/TidyData-Project)
+   * This project focuses on cleaning and tidying a messy dataset about the events, medals, and names of 2008 Olympians.
+ - Project 3: [K-Nearest Neighbors App](https://sweeny-data-science-portfolio-cu5pwrtpvbf7habq472ote.streamlit.app/)
+   * This app is shareable and explores K-Nearest Neighbors, a form of Supervised Machine Learning that classifies data.
+ - Project 4:
+   * This app is also public and dives into K-Means Clustering, a form of Unsupervised Machine Learning, helping to preprocesses data.
+
 ## Project 1- Creating my first Streamlit App! :penguin:
 ### Come try my new [penguin streamlit app](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/basic-streamlit-app)!
 
@@ -8,6 +18,9 @@
 - For this project I wanted to create an interractive app where users could engage with my code in a fun way! This is a great app for children and those interested in wildlife because it compares different species, sizes, and island of penguins.
 - I coded select boxes so users could filter penguins by island and also sliders so users could enagage with the bill and flipper length of the different penguin species. 
 
+### 	:bulb: Relationship:
+- In order to understand the importance of Unsupervised and Supervised Machine Learning practices, this project gave me the opportunity to create an Exploratory Data Analysis. While analyzing data is fun, there are a lot of steps beforehand that are necessary if one wants to manipulate and investigate data through an EDA. This project allowed me to have a better appreciation for the preprocessing steps while also exposing me to the basics of creating an app. I was able to use this Streamlit app knowledge more in my third and fourth projects.
+  
 ## Project 2- Tidy Data Project: Jump Back to the 2008 Olympics! 🏊
 ### Check out my [Tidy Data Project](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/TidyData-Project)!
 
