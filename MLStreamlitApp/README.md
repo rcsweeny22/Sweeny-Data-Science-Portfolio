@@ -1,4 +1,6 @@
 # Sweeny Machine Learning Streamlit App
+>[!IMPORTANT]
+>**Skills showcased**: KNN, Pandas, Streamlit, Supervised Machine Learning
 
 ### Project Overview: 🔀
 - For this project I dove into K Nearest Neighbors and created a space for users to analyze the accuracy and precision of a classification model. This project is heavily dependent upon proper usage, so users should be sure to read all instructions. My goal was to create something that my parents could use and understand. That is why I have information all throughout my app, so that it is educational as well as entertaining.
