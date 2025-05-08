@@ -40,7 +40,7 @@
 ### Send this [link](https://sweeny-data-science-portfolio-cu5pwrtpvbf7habq472ote.streamlit.app/) to family and friends and spread the Classification Model love!
 
 ### 🖥️ Overview:
-- In this project I created a Streamlit app that is accessible to anyone who uses this <link>. By using either a pre-loaded Seaborn dataset such as Titanic, Penguins, or Taxis, or uploading your own csv.file, users are able to explore the different dimensions of K Nearest Neighbors (KNN).
+- In this project I created a Streamlit app that is accessible to anyone who uses this [link](https://sweeny-data-science-portfolio-cu5pwrtpvbf7habq472ote.streamlit.app/). By using either a pre-loaded Seaborn dataset such as Titanic, Penguins, or Taxis, or uploading your own csv.file, users are able to explore the different dimensions of K Nearest Neighbors (KNN).
 - KNN is a form of machine learning that is used with classification models. KNN allows you to classify new data points based off of the identitiy of a certain number of (k) nearby data points or 'neighbors.'
 - By looking at the accuracy and F1-scores, the KNN classification model can be analyzed. Confusion matrices are also shown for users to visualize the data that was classified correctly and falsely by the trained KNN model. Users can also switch between scaled and unscaled data to see how that imapcts accuracy scores.
 
@@ -49,3 +49,16 @@
 
 ### 💡Relationship: 
 - As a third update to my portfolio, this project was a great way to continue on my journey learning the foundations of data science. This Streamlit App is much more complex than my previous work, but also more accessible. Hopefully by building off of my previous app experience and tidy data skills, this app makes logistic regression, specifically classification with KNN, more exciting for users!
+
+## Project 4 - Unsupervised Machine Learning: [My K-Means Clustering App](https://github.com/rcsweeny22/Sweeny-Data-Science-Portfolio/tree/main/MLUnsupervisedApp) 💠
+### Use this [link](https://sweeny-data-science-portfolio-9fedggdxehs36qbisvcsag.streamlit.app/) and send it to your friends or any Data Science lover!
+
+### 🖥️ Overview:
+- This project features an interractive Unsupervised Machine Learning application that allows users to explore the functions of K-Means Clustering. You can check out the project at this [link](https://sweeny-data-science-portfolio-9fedggdxehs36qbisvcsag.streamlit.app/)! Users are encouraged to select a preloaded Seaborn dataset or to upload their own.
+- K-Means is a form of clustering that groups points of data together in k number of clusters. It finds the optimal centroid for the k number of clusters and consequently might reveal some helpful information. K-Means Clustering is used to find unclear patterns in unlabeled data, to categorize subgroups within large unlabeled datasets, and as a beginning step to further data analysis.
+
+#### K-Means Clustering Visual:
+![K-Means Image](https://github.com/user-attachments/assets/dc878b68-e2a5-4f4e-a5bf-6cfd0cf0a3c2)
+
+### 💡Relationship: 
+- As the final project in my portfolio, this project was a great way to conclude my journey through the foundations of data science. This Streamlit App really allowed me to use my initial Streamlit skills from the first project, organize and preprocess my data like my second project taught me, and make a nice companion app for my third project. This project is the culmination of a lot of newfound knowledge and will hopefully help others to better understand Unsupervised Machine Learning.
