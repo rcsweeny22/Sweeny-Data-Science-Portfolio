@@ -1,4 +1,6 @@
-# Sweeny Machine Learning Streamlit App
+# Unsupervised Machine Learning Streamlit App
+>[!IMPORTANT]
+>**Skills showcased**: K-Means Clustering, Streamlit, Unsupervised Machine Learning
 
 ### Project Overview: 🔀
 - In this project I wanted to explore K-Means Clustering through an Unsupervised Machine Learning application. By allowing users to change the number of k clusters and upload their own dataset, this app is clearly interractive. I also really focused on including helpful explnantions throughout the app to explain the functionality and purpose of K-Means Clustering so that all users feel engaged. My goal was to build off of my skills developed in previous projects which I was able to do through the preprocessing steps and my different choices within Streamlit for ease of use.
