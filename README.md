@@ -8,7 +8,7 @@
    * This project focuses on cleaning and tidying a messy dataset about the events, medals, and names of 2008 Olympians.
  - Project 3: [K-Nearest Neighbors App](https://sweeny-data-science-portfolio-cu5pwrtpvbf7habq472ote.streamlit.app/)
    * This app is shareable and explores K-Nearest Neighbors, a form of Supervised Machine Learning that classifies data.
- - Project 4:
+ - Project 4: [K-Means Clustering App](https://sweeny-data-science-portfolio-9fedggdxehs36qbisvcsag.streamlit.app/)
    * This app is also public and dives into K-Means Clustering, a form of Unsupervised Machine Learning, helping to preprocesses data.
 
 ## Project 1- Creating my first Streamlit App! :penguin:
